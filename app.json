@@ -7,7 +7,6 @@
     "icon": "./assets/icons/icon.png",
     "scheme": "schedula",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#1E1E22",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
@@ -40,7 +39,8 @@
           "backgroundColor": "#1E1E22"
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
@@ -51,6 +51,12 @@
         "projectId": "8a93feed-edfd-420e-983b-0f38a7db955b"
       }
     },
-    "owner": "bhuvneshverma"
+    "owner": "bhuvneshverma",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8a93feed-edfd-420e-983b-0f38a7db955b"
+    }
   }
 }

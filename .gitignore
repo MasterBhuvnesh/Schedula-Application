@@ -38,3 +38,7 @@ yarn-error.*
 
 # VS Code
 .vscode/
+
+# Onboarding Screens
+onboarding app
+

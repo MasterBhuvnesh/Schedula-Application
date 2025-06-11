@@ -1,46 +1,135 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Redirect } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import React from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { Text } from '~/components';
+import { useToast } from '~/context';
+import { useTheme } from '~/hooks';
+import { wp } from '~/utils';
 
-export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFirstLaunch, setIsFirstLaunch] = useState(false);
-
-  useEffect(() => {
-    const checkFirstLaunch = async () => {
-      try {
-        const hasLaunched = await AsyncStorage.getItem('hasLaunched');
-        setIsFirstLaunch(!hasLaunched);
-      } catch (error) {
-        console.error('Error checking first launch:', error);
-        setIsFirstLaunch(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkFirstLaunch();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View
+export default function Home() {
+  const { colors } = useTheme();
+  const { showToast } = useToast();
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {/* <View
+        style={{ width: wp(100), height: hp(10), backgroundColor: 'white' }}
+      /> */}
+      <Pressable
         style={{
-          flex: 1,
-          justifyContent: 'center',
+          width: wp(80),
+          height: wp(15),
+          padding: wp(4),
+          borderRadius: wp(4),
+          margin: wp(4),
           alignItems: 'center',
-          backgroundColor: '#f5f5f5',
+          justifyContent: 'center',
+          backgroundColor: colors[600],
+          opacity: 0.9,
+          shadowColor: colors[400],
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 1,
+          shadowRadius: 100,
+          elevation: 40,
         }}
+        onPress={() => showToast('info - This is a toast message', 'info')}
       >
-        <ActivityIndicator size="large" color="#007AFF" />
-      </View>
-    );
-  }
-
-  if (isFirstLaunch) {
-    return <Redirect href="/onboarding" />;
-  }
-
-  return <Redirect href="/(tabs)" />;
+        <Text
+          style={{
+            textShadowOffset: { width: 0, height: 0 },
+          }}
+        >
+          info
+        </Text>
+      </Pressable>
+      <Pressable
+        style={{
+          width: wp(80),
+          height: wp(15),
+          padding: wp(4),
+          borderRadius: wp(4),
+          margin: wp(4),
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: colors[600],
+          opacity: 0.9,
+          shadowColor: colors[400],
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 1,
+          shadowRadius: 100,
+          elevation: 40,
+        }}
+        onPress={() => showToast('This is a toast message', 'success')}
+      >
+        <Text
+          style={{
+            textShadowOffset: { width: 0, height: 0 },
+          }}
+        >
+          success
+        </Text>
+      </Pressable>
+      <Pressable
+        style={{
+          width: wp(80),
+          height: wp(15),
+          padding: wp(4),
+          borderRadius: wp(4),
+          margin: wp(4),
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: colors[600],
+          opacity: 0.9,
+          shadowColor: colors[400],
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 1,
+          shadowRadius: 100,
+          elevation: 40,
+        }}
+        onPress={() => showToast('This is a toast message', 'error')}
+      >
+        <Text
+          style={{
+            textShadowOffset: { width: 0, height: 0 },
+          }}
+        >
+          error
+        </Text>
+      </Pressable>
+      <Pressable
+        style={{
+          width: wp(80),
+          height: wp(15),
+          padding: wp(4),
+          borderRadius: wp(4),
+          margin: wp(4),
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: colors[600],
+          opacity: 0.9,
+          shadowColor: colors[400],
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 1,
+          shadowRadius: 100,
+          elevation: 40,
+        }}
+        onPress={() => showToast('This is a toast message', 'warning')}
+      >
+        <Text
+          style={{
+            textShadowOffset: { width: 0, height: 0 },
+          }}
+        >
+          warning
+        </Text>
+      </Pressable>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({});
