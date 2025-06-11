@@ -7,6 +7,7 @@
     "icon": "./assets/icons/icon.png",
     "scheme": "schedula",
     "userInterfaceStyle": "dark",
+    "backgroundColor": "#1E1E22",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
@@ -14,9 +15,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1E1E22"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.bhuvneshverma.schedula",
+      "associatedDomains": [
+        "applinks:uncommon-zebra-27.clerk.accounts.dev",
+        "webcredentials:uncommon-zebra-27.clerk.accounts.dev"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +39,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#1E1E22"
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
