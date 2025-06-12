@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Toast } from '~/components';
+import Toast from '~/components/global/toast';
 import { ToastContext } from '~/context/toast';
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({

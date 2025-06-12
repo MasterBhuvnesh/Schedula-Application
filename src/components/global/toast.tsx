@@ -6,7 +6,7 @@ import { AppIcon } from '~/components';
 import { toast } from '~/constants/toast';
 import { ToastProps, ToastType } from '~/types/toast.type';
 
-type ColorIntensity = 50 | 200 | 700;
+type ColorIntensity = 50 | 100 | 700;
 
 // Utility function to get theme color
 const getThemeColor = (type: ToastType, intensity: ColorIntensity) => {
@@ -49,11 +49,19 @@ const Toast: React.FC<ToastProps> = ({
   const [iconRotateAnim] = useState(new Animated.Value(0));
 
   // Get all colors for the current type at once
+  // const colors = {
+  //   background: getThemeColor(type, 50),
+  //   border: getThemeColor(type, 200),
+  //   text: getThemeColor(type, 700),
+  //   iconBg: getThemeColor(type, 700),
+  // };
+
+  //  Custom colors for the toast based on type
   const colors = {
-    background: getThemeColor(type, 50),
-    border: getThemeColor(type, 200),
-    text: getThemeColor(type, 700),
-    iconBg: getThemeColor(type, 700),
+    background: 'rgba(0, 0, 0, 0.5)', // Semi-transparent white for better visibility
+    border: 'rgba(15, 14, 14, 0.37)', // Light border for contrast
+    text: getThemeColor(type, 100), // Text color based on type
+    iconColor: getThemeColor(type, 700), // Icon color based on type
   };
 
   const { component: IconComponent } = iconConfig[type];
@@ -163,12 +171,16 @@ const Toast: React.FC<ToastProps> = ({
         style={[
           styles.iconBackground,
           {
-            backgroundColor: colors.iconBg,
             transform: [{ scale: iconScaleAnim }],
           },
         ]}
       >
-        <AppIcon Icon={IconComponent} strokeWidth={2} size={16} color="white" />
+        <AppIcon
+          Icon={IconComponent}
+          strokeWidth={2}
+          size={16}
+          color={colors.iconColor}
+        />
       </Animated.View>
 
       <Animated.View
@@ -221,7 +233,7 @@ const styles = StyleSheet.create({
     padding: 7,
   },
   androidShadow: {
-    elevation: 6,
+    elevation: 0,
   },
   iosShadow: {
     shadowColor: '#000',

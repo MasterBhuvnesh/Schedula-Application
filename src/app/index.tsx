@@ -4,10 +4,10 @@ import { Text } from '~/components';
 import { useToast } from '~/context';
 import { useTheme } from '~/hooks';
 import { wp } from '~/utils';
-
 export default function Home() {
   const { colors } = useTheme();
   const { showToast } = useToast();
+  const text: string = 'This is a toast message';
   return (
     <View
       style={{
@@ -17,9 +17,16 @@ export default function Home() {
         alignItems: 'center',
       }}
     >
+      {/* The view below is use to represent the area used for toast msg and statusbar is from react native not from expo status bar */}
       {/* <View
-        style={{ width: wp(100), height: hp(10), backgroundColor: 'white' }}
+        style={{
+          width: wp(100),
+          marginTop: StatusBar.currentHeight || 0,
+          height: hp(12),
+          backgroundColor: 'white',
+        }}
       /> */}
+      {/* INFO */}
       <Pressable
         style={{
           width: wp(80),
@@ -47,6 +54,7 @@ export default function Home() {
           info
         </Text>
       </Pressable>
+      {/* SUCCESS */}
       <Pressable
         style={{
           width: wp(80),
@@ -74,6 +82,7 @@ export default function Home() {
           success
         </Text>
       </Pressable>
+      {/* ERROR */}
       <Pressable
         style={{
           width: wp(80),
@@ -101,6 +110,7 @@ export default function Home() {
           error
         </Text>
       </Pressable>
+      {/* WARNING */}
       <Pressable
         style={{
           width: wp(80),
