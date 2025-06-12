@@ -17,11 +17,7 @@
         "backgroundColor": "#1E1E22"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.bhuvneshverma.schedula",
-      "associatedDomains": [
-        "applinks:uncommon-zebra-27.clerk.accounts.dev",
-        "webcredentials:uncommon-zebra-27.clerk.accounts.dev"
-      ]
+      "package": "com.bhuvneshverma.schedula"
     },
     "web": {
       "bundler": "metro",

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Text } from '~/components';

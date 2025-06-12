@@ -31,16 +31,14 @@
  * @remarks
  * This utility is useful for vertical spacing or sizing elements relative to the device's height.
  */
-import { useWindowDimensions } from 'react-native';
-
-const { width: deviceWidth, height: deviceHeight } = useWindowDimensions();
+import { Dimensions } from 'react-native';
 
 export const wp = (percentage: number) => {
-  const width = deviceWidth;
+  const { width } = Dimensions.get('window');
   return (percentage * width) / 100;
 };
 
 export const hp = (percentage: number) => {
-  const height = deviceHeight;
+  const { height } = Dimensions.get('window');
   return (percentage * height) / 100;
 };

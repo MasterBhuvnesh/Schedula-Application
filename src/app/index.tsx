@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Text } from '~/components';
 import { useToast } from '~/context';
 import { useTheme } from '~/hooks';
@@ -7,7 +7,6 @@ import { wp } from '~/utils';
 export default function Home() {
   const { colors } = useTheme();
   const { showToast } = useToast();
-  const text: string = 'This is a toast message';
   return (
     <View
       style={{
@@ -141,5 +140,3 @@ export default function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

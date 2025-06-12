@@ -13,7 +13,7 @@ export default function RootLayout() {
     if (loaded || error) {
       loadTheme();
     }
-  }, [loaded, error]);
+  }, [loaded, error, loadTheme]);
 
   if (!loaded && !error) {
     return <Loader />;

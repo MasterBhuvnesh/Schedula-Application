@@ -66,6 +66,34 @@ const Toast: React.FC<ToastProps> = ({
 
   const { component: IconComponent } = iconConfig[type];
 
+  const hideToast = React.useCallback(() => {
+    // Exit animation sequence
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: -100,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 0.8,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      Animated.timing(iconScaleAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      onDismiss?.();
+    });
+  }, [fadeAnim, slideAnim, scaleAnim, iconScaleAnim, onDismiss]);
+
   useEffect(() => {
     if (visible) {
       // Reset animations
@@ -120,35 +148,16 @@ const Toast: React.FC<ToastProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, [visible]);
-
-  const hideToast = () => {
-    // Exit animation sequence
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: -100,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 0.8,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-      Animated.timing(iconScaleAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      onDismiss?.();
-    });
-  };
+  }, [
+    visible,
+    duration,
+    fadeAnim,
+    slideAnim,
+    scaleAnim,
+    iconScaleAnim,
+    iconRotateAnim,
+    hideToast,
+  ]);
 
   if (!visible) return null;
 
