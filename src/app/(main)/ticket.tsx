@@ -1,4 +1,3 @@
-import THEMING from '@/src/components/ui/theming';
 import React from 'react';
 import { View } from 'react-native';
 import { Text } from '~/components';
@@ -15,7 +14,6 @@ export default function TicketScreen() {
         }}
       >
         <Text>TicketScreen</Text>
-        <THEMING />
       </View>
     </BackgroundProvider>
   );

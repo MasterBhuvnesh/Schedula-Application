@@ -3,6 +3,7 @@ import { Redirect } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 import { AuthView } from '~/components';
+
 export default function Home() {
   return (
     <View

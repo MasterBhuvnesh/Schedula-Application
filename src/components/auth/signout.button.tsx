@@ -29,7 +29,24 @@ export const SignOutButton = () => {
   };
 
   return (
-    <TouchableOpacity onPress={confirmSignOut}>
+    <TouchableOpacity
+      onPress={confirmSignOut}
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 20,
+        width: '40%',
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Text
         style={{
           color: '#fff',

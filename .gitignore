@@ -40,5 +40,5 @@ yarn-error.*
 .vscode/
 
 # Onboarding Screens
-onboarding app
-
+onboarding.tsx
+useFirstLaunch.ts

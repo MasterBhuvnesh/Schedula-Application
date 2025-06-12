@@ -10,7 +10,12 @@ export default function _layout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen name="home" options={{ title: 'Home' }} />
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: 'Home',
+        }}
+      />
       <Tabs.Screen name="ticket" options={{ title: 'Ticket' }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
     </Tabs>

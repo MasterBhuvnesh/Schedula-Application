@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.51)',
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: wp(60),
     alignSelf: 'center',
     bottom: 40,
