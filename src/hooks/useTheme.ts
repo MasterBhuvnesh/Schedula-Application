@@ -1,5 +1,5 @@
-import { themes } from '@/src/context/theme';
 import { color } from '~/constants/colors';
+import { themes } from '~/context/theme';
 import { useThemeStore } from '~/lib/themeStore';
 import { ThemeType } from '~/types/theme.type';
 

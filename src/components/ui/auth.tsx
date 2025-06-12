@@ -2,12 +2,9 @@ import { Image } from 'expo-image';
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { GoogleAuth, Text } from '~/components';
-import { useTheme } from '~/hooks';
 import { hp, wp } from '~/utils';
 
 export default function AuthView() {
-  const { colors } = useTheme();
-
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
@@ -45,7 +42,7 @@ export default function AuthView() {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim, logoScaleAnim, buttonScaleAnim]);
 
   return (
     <View style={styles.container}>
@@ -69,7 +66,7 @@ export default function AuthView() {
             transform: [{ translateY: slideAnim }],
           }}
         >
-          <Text bold style={{ ...styles.title, color: colors[600] }}>
+          <Text bold style={{ ...styles.title, color: '#059669' }}>
             Welcome to Schedula
           </Text>
           <Text style={styles.subtitle}>
@@ -90,7 +87,7 @@ export default function AuthView() {
       >
         <GoogleAuth
           buttonStyle={styles.googleButton}
-          iconColor={colors[500]}
+          iconColor={'#10b981'}
           textStyle={styles.googleButtonText}
         />
       </Animated.View>

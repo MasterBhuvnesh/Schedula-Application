@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from '~/components';
+import { SignOutButton, Text } from '~/components';
 import { BackgroundProvider } from '~/providers';
 export default function ProfileScreen() {
   return (
@@ -14,6 +14,8 @@ export default function ProfileScreen() {
         }}
       >
         <Text>ProfileScreen</Text>
+
+        <SignOutButton />
       </View>
     </BackgroundProvider>
   );

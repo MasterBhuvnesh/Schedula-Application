@@ -54,7 +54,7 @@ export default function GoogleAuth({
       authlog.error('Error during Google SSO flow :' + err);
       showToast('An error occurred during authentication. Please try again.');
     }
-  }, []);
+  }, [showToast, startSSOFlow]);
 
   return (
     <GoogleButton
