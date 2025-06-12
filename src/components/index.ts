@@ -9,3 +9,18 @@ export {
   CustomLoader as Loader,
   CustomText as Text,
 };
+
+// Auth components
+import { SignOutButton } from './auth/signout.button';
+export { SignOutButton };
+
+import { GoogleButton } from './auth/signin.button';
+export { GoogleButton };
+
+// SSO components
+import GoogleAuth from './sso/google.auth';
+export { GoogleAuth };
+
+// UI components
+import AuthView from './ui/auth';
+export { AuthView };

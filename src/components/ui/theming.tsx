@@ -6,7 +6,7 @@ import { color } from '~/constants/colors';
 import { useTheme } from '~/hooks/useTheme';
 import { ThemeType } from '~/types/theme.type';
 
-const index = () => {
+const THEMING = () => {
   const { theme, setTheme, loadTheme, colors } = useTheme();
 
   useEffect(() => {
@@ -62,4 +62,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default THEMING;

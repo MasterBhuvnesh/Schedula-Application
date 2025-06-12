@@ -1,6 +1,6 @@
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useVideoPlayer, VideoView } from 'expo-video';
+import { useVideoPlayer } from 'expo-video';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { color } from '~/constants/colors';
@@ -69,12 +69,27 @@ export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
 
   return (
     <View style={styles.container}>
-      <VideoView
+      {/* <VideoView
         style={styles.video}
         player={player}
         allowsFullscreen={false}
         allowsPictureInPicture={false}
+        nativeControls={false}
+        showsTimecodes={false}
         contentFit="cover"
+      /> */}
+      {/* LINEAR GRADIENT - in case of video error */}
+      <LinearGradient
+        colors={[
+          themecolors[700],
+          themecolors[800],
+          themecolors[900],
+          themecolors[950],
+          '#000000',
+        ]}
+        style={StyleSheet.absoluteFill}
+        start={{ x: 0.8, y: 1.5 }}
+        end={{ x: 0.5, y: 0 }}
       />
       <View style={styles.darkOverlay} />
       <BlurView intensity={90} tint="dark" style={styles.blurContainer}>
