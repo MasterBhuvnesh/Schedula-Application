@@ -1,60 +1,86 @@
-import { useToast } from '@/src/context';
-import { useTheme } from '@/src/hooks';
-import { wp } from '@/src/utils';
-import React from 'react';
-import { Pressable, View } from 'react-native';
-import { Text } from '~/components';
-import { BackgroundProvider } from '~/providers';
+import React, { useEffect } from 'react';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Error, EventCard, Loader, Text } from '~/components';
+import { useEventsData } from '~/hooks';
+import { datalog } from '~/logger';
+import { ScreenTabsProvider } from '~/providers';
+import { hp, wp } from '~/utils';
 export default function HomeScreen() {
-  const { colors } = useTheme();
-  const { showToast } = useToast();
+  const { events, loading, error, refetch, loadMore, hasMore } =
+    useEventsData();
+
+  useEffect(() => {
+    if (error) {
+      datalog.error('Error fetching events', error); // Log the error
+    }
+  }, [error]);
+
+  const renderContent = () => {
+    if (loading && events.length === 0) {
+      return <Loader />;
+    }
+
+    if (error && events.length === 0) {
+      return <Error message={error} />;
+    }
+
+    if (!loading && events.length === 0) {
+      return (
+        <View style={styles.center}>
+          <Text>No events available.</Text>
+        </View>
+      );
+    }
+
+    return (
+      <FlatList
+        data={events}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => <EventCard event={item} />}
+        contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={refetch} />
+        }
+        onEndReached={() => {
+          if (hasMore && !loading) {
+            loadMore();
+          }
+        }}
+        onEndReachedThreshold={0.5} // Trigger when 50% from the end
+        ListFooterComponent={loading && events.length > 0 ? <Loader /> : null}
+      />
+    );
+  };
+
   return (
-    <BackgroundProvider>
+    <ScreenTabsProvider>
       <View
         style={{
-          flex: 1,
-          alignContent: 'center',
-          justifyContent: 'center',
+          width: wp(100),
+          height: hp(67) > 520 ? hp(67) : 520, // Ensure minimum height for smaller screens
           alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'transparent',
         }}
       >
-        <Text>HomeScreen</Text>
-
-        <Pressable
-          style={{
-            opacity: 0.8,
-            backgroundColor: colors[500],
-            borderRadius: 5,
-            width: wp(60),
-            paddingVertical: 12,
-            paddingHorizontal: 20,
-            shadowColor: colors[600],
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4,
-            elevation: 5,
-            marginTop: 20,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 20,
-            alignSelf: 'center',
-          }}
-          onPress={() => {
-            // Navigate to the ticket screen
-            // This is just a placeholder, replace with actual navigation logic
-            showToast('Success', 'success');
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: 'Regular',
-              textAlign: 'center',
-            }}
-          >
-            Go to Ticket
-          </Text>
-        </Pressable>
+        {renderContent()}
       </View>
-    </BackgroundProvider>
+    </ScreenTabsProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  list: {
+    padding: 16,
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+});

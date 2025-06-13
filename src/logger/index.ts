@@ -1,2 +1,3 @@
 import authlog from './auth.log';
-export { authlog };
+import datalog from './data.log';
+export { authlog, datalog };

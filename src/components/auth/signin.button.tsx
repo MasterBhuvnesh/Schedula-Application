@@ -2,6 +2,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
 import { TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Text } from '~/components';
+import { wp } from '~/utils';
 
 type GoogleButtonProps = {
   onPress: () => void;
@@ -21,7 +22,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = ({
       onPress={onPress}
       style={{ flexDirection: 'row', alignItems: 'center' }}
     >
-      <FontAwesome5 name="google" size={18} color={iconColor} />
+      <FontAwesome5 name="google" size={wp(4.5)} color={iconColor} />
       <Text style={textStyle}>Google</Text>
     </TouchableOpacity>
   </View>

@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    // backgroundColor: '#000',   // In case of no Linear Gradient
     width: wp(60),
     alignSelf: 'center',
     bottom: 40,

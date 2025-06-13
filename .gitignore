@@ -42,3 +42,6 @@ yarn-error.*
 # Onboarding Screens
 onboarding.tsx
 useFirstLaunch.ts
+
+# Eas Ignore
+.easignore

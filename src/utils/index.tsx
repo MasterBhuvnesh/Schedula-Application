@@ -8,17 +8,17 @@
  * You can use this utility to create responsive font sizes or element widths based on the device's width.
  *
  * ### Example font size percentages (approximate, adjust as needed for your design):
- * - Font size 12: `wp(3.2)`   // ~12px on a 375px wide device
- * - Font size 14: `wp(3.7)`   // ~14px on a 375px wide device
- * - Font size 16: `wp(4.3)`   // ~16px on a 375px wide device
- * - Font size 18: `wp(4.8)`   // ~18px on a 375px wide device
+ * - Font size 12: `wp(3.33)`   // ~12px on a 360px wide device
+ * - Font size 14: `wp(3.89)`   // ~14px on a 360px wide device
+ * - Font size 16: `wp(4.44)`   // ~16px on a 360px wide device
+ * - Font size 18: `wp(5)`      // ~18px on a 360px wide device
  *
  * ### Example heading sizes:
- * - h1: `wp(6.4)`   // ~24px
- * - h2: `wp(5.3)`   // ~20px
- * - h3: `wp(4.8)`   // ~18px
+ * - h1: `wp(6.67)`   // ~24px
+ * - h2: `wp(5.56)`   // ~20px
+ * - h3: `wp(5)`      // ~18px
  *
- * Adjust these percentages based on your target device base width (e.g., 375px for iPhone X).
+ * Adjust these percentages based on your target device base width (e.g., 360px for many Android devices).
  * For best results, test on multiple devices and tweak as needed.
  */
 

@@ -1,5 +1,13 @@
-import useCustomFonts from './useFont';
-import { useFrameworkReady } from './useFrameworkReady';
-import { useTheme } from './useTheme';
-import { useWarmUpBrowser } from './useWarmUpBrowser';
-export { useCustomFonts, useFrameworkReady, useTheme, useWarmUpBrowser };
+import useCustomFonts from './ui/useFont';
+import { useFrameworkReady } from './ui/useFrameworkReady';
+import { useTheme } from './ui/useTheme';
+import { useWarmUpBrowser } from './ui/useWarmUpBrowser';
+// App Data hooks
+import { useEventsData } from './useEvents';
+export {
+  useCustomFonts,
+  useEventsData,
+  useFrameworkReady,
+  useTheme,
+  useWarmUpBrowser,
+};

@@ -1,7 +1,7 @@
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
-import { useTheme } from '~/hooks/useTheme';
+import { useTheme } from '~/hooks';
 import { BackgroundProviderProps } from '~/types/background.type';
 
 export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
@@ -89,6 +89,14 @@ export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
         end={{ x: 0.5, y: 0 }}
       />
       <View style={styles.darkOverlay} />
+      {/*  Look Cooled - Short Trick */}
+      {/* <Image
+        source={{
+          uri: 'https://bqoschvttqomhxalmxoi.supabase.co/storage/v1/object/public/event-banners/a9e407c98e92c6ffc59e086495f19360.jpg',
+        }}
+        style={StyleSheet.absoluteFillObject}
+        blurRadius={10}
+      /> */}
       <BlurView intensity={90} tint="dark" style={styles.blurContainer}>
         {children}
       </BlurView>

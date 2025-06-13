@@ -1,10 +1,10 @@
-import { hp } from '@/src/utils';
 import { AlertTriangle, CheckCircle, Info, XCircle } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { Animated, Platform, StyleSheet, Text } from 'react-native';
 import { AppIcon } from '~/components';
 import { toast } from '~/constants/toast';
 import { ToastProps, ToastType } from '~/types/toast.type';
+import { hp, wp } from '~/utils';
 
 type ColorIntensity = 50 | 100 | 700;
 
@@ -225,14 +225,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 999,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.9,
     shadowRadius: 20,
     elevation: 20,
   },
   message: {
-    fontSize: 12,
+    fontSize: wp(3.5),
     fontFamily: 'regular',
     marginLeft: 10,
     flexShrink: 1,
