@@ -1,51 +1,6 @@
-// import { useCallback, useEffect, useState } from 'react';
-// import { supabase } from '~/lib/supabase';
-// import { Event } from '~/types/event.type';
-
-// export const useEventsData = () => {
-//   const [events, setEvents] = useState<Event[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
-
-//   const fetchEvents = useCallback(async () => {
-//     setLoading(true);
-//     try {
-//       const { data, error: fetchError } = await supabase
-//         .from('events')
-//         .select('*')
-//         .order('status', { ascending: true })
-//         .order('registration_status', { ascending: true })
-//         .order('start_time', { ascending: true });
-
-//       if (fetchError) throw fetchError;
-//       setEvents(data || []);
-//       setError(null);
-//     } catch (err: any) {
-//       setError(err.message || 'Error fetching events');
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     let isMounted = true;
-//     const load = async () => {
-//       await fetchEvents();
-//     };
-//     if (isMounted) load();
-//     return () => {
-//       isMounted = false;
-//     };
-//   }, [fetchEvents]);
-
-//   return { events, loading, error, refetch: fetchEvents };
-// };
-
-//  CODE WITH PAGINATION
-
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '~/lib/supabase';
-import { Event } from '~/types/event.type';
+import { Event } from '~/types/data/event.type';
 
 export const useEventsData = () => {
   const [events, setEvents] = useState<Event[]>([]);

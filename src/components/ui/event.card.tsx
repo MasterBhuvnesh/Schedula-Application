@@ -24,7 +24,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { AppIcon } from '~/components';
 import { datalog } from '~/logger';
-import { Event } from '~/types/event.type';
+import { Event } from '~/types/data/event.type';
 import { ToastContextType } from '~/types/toast.type';
 import { FormatDate, wp } from '~/utils';
 

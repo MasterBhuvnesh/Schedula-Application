@@ -50,7 +50,7 @@ export const SignOutButton = () => {
       <Text
         style={{
           color: '#fff',
-          fontFamily: 'Regular',
+          fontFamily: 'regular',
           textAlign: 'center',
         }}
       >

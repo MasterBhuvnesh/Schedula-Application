@@ -1,22 +1,41 @@
-import React from 'react';
-import { View } from 'react-native';
-import { SignOutButton, Text } from '~/components';
+import React, { useCallback, useState } from 'react';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { Error, Loader, ProfileCard, SignOutButton } from '~/components';
+import { useUserData } from '~/hooks';
 import { BackgroundProvider } from '~/providers';
+
 export default function ProfileScreen() {
+  const { userData, error, refetch } = useUserData();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }, [refetch]);
+
   return (
     <BackgroundProvider>
-      <View
-        style={{
-          flex: 1,
-          alignContent: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+      <ScrollView
+        contentContainerStyle={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <Text>ProfileScreen</Text>
-
+        {!userData && !error && <Loader />}
+        {error && <Error message={error ?? undefined} />}
+        {userData && <ProfileCard user={userData} />}
         <SignOutButton />
-      </View>
+      </ScrollView>
     </BackgroundProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+});

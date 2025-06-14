@@ -54,7 +54,7 @@ export default function AuthView() {
           }}
         >
           <Image
-            source={require('@/assets/icons/icon.png')}
+            source={require('@/assets/images/icon.png')}
             contentFit="contain"
             style={styles.logo}
           />
@@ -87,7 +87,6 @@ export default function AuthView() {
       >
         <GoogleAuth
           buttonStyle={styles.googleButton}
-          iconColor={'#10b981'}
           textStyle={styles.googleButtonText}
         />
       </Animated.View>
@@ -98,7 +97,8 @@ export default function AuthView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e1e22',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+
     paddingHorizontal: 24,
     justifyContent: 'center',
   },
@@ -107,11 +107,10 @@ const styles = StyleSheet.create({
     gap: hp(2),
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: wp(50),
+    height: wp(50),
     marginBottom: 28,
     borderRadius: 24,
-    backgroundColor: '#1e1e22',
     shadowColor: '#000',
   },
   title: {
@@ -131,20 +130,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   googleButton: {
+    width: wp(60),
+    height: hp(7.5),
+    marginVertical: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: 12,
+    backgroundColor: 'rgba(255,255,255, 0.5)',
+    opacity: 0.8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.9,
+    shadowRadius: 20,
+    elevation: 20,
     flexDirection: 'row',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#23232a',
-    borderRadius: wp(3.2),
-    paddingVertical: wp(3.7),
-    paddingHorizontal: wp(6.8),
-    marginTop: wp(3.2),
-    width: wp(80),
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
+    paddingHorizontal: wp(4),
+    marginTop: 20,
   },
   googleButtonText: {
     color: '#fff',

@@ -17,6 +17,7 @@ import AuthView from './ui/auth';
 import { EventCard } from './ui/event.card';
 import Footer from './ui/footer';
 import Header from './ui/header';
+import { ProfileCard } from './ui/profile.card';
 import CustomNavBar from './ui/tabnavbar';
 export {
   AppIcon,
@@ -30,6 +31,7 @@ export {
   GoogleButton,
   Header,
   CustomLoader as Loader,
+  ProfileCard,
   SignOutButton,
   CustomText as Text,
 };

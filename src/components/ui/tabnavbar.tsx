@@ -11,8 +11,8 @@ import Animated, {
   FadeOut,
   LinearTransition,
 } from 'react-native-reanimated';
+import { AppIcon } from '~/components';
 import { wp } from '~/utils';
-import { AppIcon } from '../global/icon';
 
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity);
