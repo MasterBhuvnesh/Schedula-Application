@@ -1,11 +1,12 @@
-/*
-NOT YET  SURE ABOUT THE BACKGROUND PROVIDER
-OPTIONS :
-1. Video Background 
-2. Image Background with Blur
-3. Linear Gradient with Blur
+/*  
+IMAGE BACKGROUND WITH BLUR AND LINEAR GRADIENT
+THIS COMPONENT IS A PROVIDER THAT USES AN IMAGE AS A BACKGROUND WITH A BLUR EFFECT AND A LINEAR GRADIENT ON TOP.
+CASES:
+1. It applies a blurred image as the background.
+2. It adds a dark overlay on top of the blurred image.
+3. It applies a linear gradient on top of the dark overlay.
+[This is useful for creating a visually appealing background for the app while maintaining readability of the content on top.]
 */
-/* USING -  IMAGE BACKGROUND WITH BLUR  */
 
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';

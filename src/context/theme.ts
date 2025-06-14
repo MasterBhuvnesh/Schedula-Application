@@ -18,6 +18,10 @@ export const themes: Record<ThemeType, Theme> = {
     name: 'Rose',
     colors: color.Rose,
   },
+  Zinc: {
+    name: 'Zinc',
+    colors: color.Zinc,
+  },
 };
 
 export const defaultTheme: ThemeType = 'Emerald';

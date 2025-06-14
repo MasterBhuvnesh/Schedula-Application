@@ -1,7 +1,7 @@
 import React from 'react';
 import { Footer, Header } from '~/components';
+import { BackgroundProvider } from '~/providers';
 import { ScreenTabsProviderProps } from '~/types/tab.screen.type';
-import { BackgroundProvider } from './background';
 
 export const ScreenTabsProvider: React.FC<ScreenTabsProviderProps> = ({
   children,

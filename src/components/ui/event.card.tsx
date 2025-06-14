@@ -102,33 +102,34 @@ const EventCard: React.FC<Props> = React.memo(
               {event.price === 0 ? 'FREE' : `₹ ${event.price}`}
             </Animated.Text>
           </Animated.View>
-          <Animated.View style={styles.iconContainer}>
-            <Pressable
-              onPress={() => {
-                if (event.registration_status === 'Open') {
-                  showToast!(
-                    `Registration is open for ${event.title}.`,
-                    'success'
-                  );
-                  // Add your registration logic here
-                } else if (
-                  event.registration_status === 'Closed' &&
-                  event.status === 'Upcoming'
-                ) {
-                  showToast!(
-                    `Registration for ${event.title} has not opened yet.`,
-                    'lock'
-                  );
-                } else {
-                  // Show toast for closed registration
-                  datalog.data('Registration Closed for Event', event.id);
-                  showToast!(
-                    `Registration is closed for ${event.title}.`,
-                    'info'
-                  );
-                }
-              }}
-            >
+
+          <Pressable
+            onPress={() => {
+              if (event.registration_status === 'Open') {
+                showToast!(
+                  `Registration is open for ${event.title}.`,
+                  'success'
+                );
+                // Add your registration logic here
+              } else if (
+                event.registration_status === 'Closed' &&
+                event.status === 'Upcoming'
+              ) {
+                showToast!(
+                  `Registration for ${event.title} has not opened yet.`,
+                  'lock'
+                );
+              } else {
+                // Show toast for closed registration
+                datalog.data('Registration Closed for Event', event.id);
+                showToast!(
+                  `Registration is closed for ${event.title}.`,
+                  'info'
+                );
+              }
+            }}
+          >
+            <Animated.View style={styles.iconContainer}>
               {IconComponent && (
                 <AppIcon
                   Icon={IconComponent}
@@ -137,8 +138,8 @@ const EventCard: React.FC<Props> = React.memo(
                   fill={iconfill}
                 />
               )}
-            </Pressable>
-          </Animated.View>
+            </Animated.View>
+          </Pressable>
         </Animated.View>
       </Animated.View>
     );

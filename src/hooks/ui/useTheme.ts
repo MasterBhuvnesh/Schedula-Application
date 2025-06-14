@@ -1,6 +1,6 @@
 import { color } from '~/constants/colors';
 import { themes } from '~/context/theme';
-import { useThemeStore } from '~/lib/themeStore';
+import { useThemeStore } from '~/stores/themeStore';
 import { ThemeType } from '~/types/theme.type';
 
 export const useTheme = () => {

@@ -1,34 +1,35 @@
 /*
-NOT YET  SURE ABOUT THE BACKGROUND PROVIDER
-OPTIONS :
-1. Video Background 
-2. Image Background with Blur
-3. Linear Gradient with Blur
+THEME LINEAR BACKGROUND PROVIDER
+THIS COMPONENT IS A PROVIDER THAT USES DEFINED THEME WITH LINEAR GRADIENT AS A BACKGROUND. 
+[Theme can be changed by user in settings]
+CASES:
+1. It applies a linear gradient background using the theme colors.
+2. It adds a dark overlay on top of the gradient.
 */
-/* USING -  IMAGE BACKGROUND WITH BLUR  */
 
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
+import { useTheme } from '~/hooks';
 import { BackgroundProviderProps } from '~/types/background.type';
 
 export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
+  const { colors: themecolors } = useTheme();
+
   return (
     <View style={styles.container}>
-      <View style={styles.darkOverlay} />
-      <Image
-        source={{
-          uri: 'https://bqoschvttqomhxalmxoi.supabase.co/storage/v1/object/public/event-banners/a9e407c98e92c6ffc59e086495f19360.jpg',
-        }}
-        style={StyleSheet.absoluteFillObject}
-        blurRadius={20}
-      />
       <LinearGradient
-        colors={['#000', '#000', 'transparent', 'transparent']}
+        colors={[
+          themecolors[700],
+          themecolors[800],
+          themecolors[900],
+          themecolors[950],
+          '#000000',
+        ]}
         style={StyleSheet.absoluteFill}
         start={{ x: 0.8, y: 1.5 }}
         end={{ x: 0.5, y: 0 }}
       />
+      <View style={styles.darkOverlay} />
       {children}
     </View>
   );

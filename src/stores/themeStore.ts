@@ -22,7 +22,7 @@ export const useThemeStore = create<ThemeState>(set => ({
       )) as ThemeType | null;
       if (
         storedTheme &&
-        ['Amber', 'Emerald', 'Sky', 'Rose'].includes(storedTheme)
+        ['Amber', 'Emerald', 'Sky', 'Rose', 'Zinc'].includes(storedTheme)
       ) {
         set({ theme: storedTheme });
       } else {

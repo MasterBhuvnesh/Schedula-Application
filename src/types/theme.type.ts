@@ -1,4 +1,4 @@
-export type ThemeType = 'Amber' | 'Emerald' | 'Sky' | 'Rose';
+export type ThemeType = 'Amber' | 'Emerald' | 'Sky' | 'Rose' | 'Zinc';
 
 export interface Theme {
   name: ThemeType;
