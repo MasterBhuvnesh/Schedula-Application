@@ -1,4 +1,4 @@
-> **Note:** This Supabase Test is for educational purposes.
+> **Note:** This Supabase Implementation is for educational purposes.
 
 # Quotes List
 

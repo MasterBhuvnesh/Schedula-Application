@@ -6,9 +6,16 @@ export const AppIcon: React.FC<AppIconProps> = ({
   size = 24,
   color = 'black',
   strokeWidth = 2,
+  fill = 'transparent',
   style,
 }) => {
   return (
-    <Icon size={size} color={color} strokeWidth={strokeWidth} style={style} />
+    <Icon
+      size={size}
+      color={color}
+      strokeWidth={strokeWidth}
+      style={style}
+      fill={fill}
+    />
   );
 };

@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  View,
+  ViewToken,
+} from 'react-native';
+import { useSharedValue } from 'react-native-reanimated';
 import { Error, EventCard, Loader, Text } from '~/components';
+import { useToast } from '~/context';
 import { useEventsData } from '~/hooks';
 import { datalog } from '~/logger';
 import { ScreenTabsProvider } from '~/providers';
 import { hp, wp } from '~/utils';
+
 export default function HomeScreen() {
   const { events, loading, error, refetch, loadMore, hasMore } =
     useEventsData();
-
+  const viewableItems = useSharedValue<ViewToken[]>([]);
+  const { showToast } = useToast();
   useEffect(() => {
     if (error) {
       datalog.error('Error fetching events', error); // Log the error
@@ -35,10 +45,19 @@ export default function HomeScreen() {
     return (
       <FlatList
         data={events}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => <EventCard event={item} />}
         contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
+        onViewableItemsChanged={({ viewableItems: vItems }) => {
+          viewableItems.value = vItems;
+        }}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
+          <EventCard
+            event={item}
+            viewableItems={viewableItems}
+            showToast={showToast}
+          />
+        )}
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={refetch} />
         }
@@ -48,7 +67,7 @@ export default function HomeScreen() {
           }
         }}
         onEndReachedThreshold={0.5} // Trigger when 50% from the end
-        ListFooterComponent={loading && events.length > 0 ? <Loader /> : null}
+        // ListFooterComponent={loading && events.length > 0 ? <Loader /> : null} // Uncomment if you want a footer loader
       />
     );
   };
@@ -58,7 +77,7 @@ export default function HomeScreen() {
       <View
         style={{
           width: wp(100),
-          height: hp(67) > 520 ? hp(67) : 520, // Ensure minimum height for smaller screens
+          height: hp(70) > 540 ? hp(70) : 540, // Ensure minimum height for smaller screens
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'transparent',

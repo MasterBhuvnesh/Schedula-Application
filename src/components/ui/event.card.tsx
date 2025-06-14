@@ -14,212 +14,224 @@ Points :
 - It's Sorted by status , registration_status & start_time in ASCENDING order.
 */
 
-import { AppIcon } from '~/components';
-// import { theme } from '@/constants/theme';
-import { Event } from '~/types/event.type';
-// import { formatDate } from '@/utils/date';
 import { Image } from 'expo-image';
-import { CalendarClock, IndianRupee, MapPin } from 'lucide-react-native';
+import { ChevronRight, CircleCheck, Lock } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, ViewToken } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import { AppIcon } from '~/components';
+import { datalog } from '~/logger';
+import { Event } from '~/types/event.type';
+import { ToastContextType } from '~/types/toast.type';
+import { FormatDate, wp } from '~/utils';
 
 interface Props {
+  viewableItems: Animated.SharedValue<ViewToken[]>;
   event: Event;
+  showToast?: ToastContextType['showToast'];
 }
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  };
-  return date.toLocaleDateString('en-US', options);
-};
 
-const theme = {
-  colors: {
-    background: '#000',
-    text: '#ffffff',
-    border: '#ffffff',
-    activetab: '#ffffff',
-    tab: '#6b7280',
-    gray: {
-      50: '#f9fafb',
-      100: '#f3f4f6',
-      200: '#e5e7eb',
-      300: '#d1d5db',
-      400: '#9ca3af',
-      500: '#6b7280',
-      600: '#4b5563',
-      700: '#374151',
-      800: '#1f2937',
-      900: '#111827',
-    },
-    success: {
-      50: '#ecfdf5',
-      100: '#d1fae5',
-      200: '#a7f3d0',
-      300: '#6ee7b7',
-      400: '#34d399',
-      500: '#10b981',
-      600: '#059669',
-      700: '#4CAF50',
-      800: '#065f46',
-      900: '#064e3b',
-    },
-    warning: {
-      50: '#fffbeb',
-      100: '#fef3c7',
-      200: '#fde68a',
-      300: '#fcd34d',
-      400: '#fbbf24',
-      500: '#f59e0b',
-      600: '#d97706',
-      700: '#FF9800',
-      800: '#92400e',
-      900: '#78350f',
-    },
-    error: {
-      50: '#fef2f2',
-      100: '#fee2e2',
-      200: '#fecaca',
-      300: '#fca5a5',
-      400: '#f87171',
-      500: '#ef4444',
-      600: '#dc2626',
-      700: '#F44336',
-      800: '#991b1b',
-      900: '#7f1d1d',
-    },
-    info: {
-      50: '#eff6ff',
-      100: '#dbeafe',
-      200: '#bfdbfe',
-      300: '#93c5fd',
-      400: '#60a5fa',
-      500: '#3b82f6',
-      600: '#2563eb',
-      700: '#2196F3',
-      800: '#1e40af',
-      900: '#1e3a8a',
-    },
-  },
-};
+const EventCard: React.FC<Props> = React.memo(
+  ({ event, viewableItems, showToast }) => {
+    datalog.data('Event Data ', event); // Log the event data for debugging
+    const rStyle = useAnimatedStyle(() => {
+      const isVisible = Boolean(
+        viewableItems.value
+          .filter(item => item.isViewable)
+          .find(viewableItem => viewableItem.item.id === event.id)
+      );
 
-export const EventCard = ({ event }: Props) => {
-  return (
-    <View style={styles.card}>
-      <Image
-        source={event.banner_image_url}
-        style={styles.image}
-        contentFit="cover"
-        transition={300}
-      />
-      <View style={styles.content}>
-        <Text style={styles.title}>{event.title}</Text>
-        <Text style={styles.description}>{event.description}</Text>
-
-        <View style={styles.row}>
-          <AppIcon Icon={MapPin} color={theme.colors.text} size={18} />
-          <Text style={styles.text}>{event.location}</Text>
-        </View>
-
-        {event.start_time && (
-          <View style={styles.row}>
-            <AppIcon Icon={CalendarClock} color={theme.colors.text} size={18} />
-            <Text style={styles.text}>
-              Start At : {formatDate(event.start_time)}
-            </Text>
-          </View>
-        )}
-        {event.end_time && (
-          <View style={styles.row}>
-            <AppIcon Icon={CalendarClock} color={theme.colors.text} size={18} />
-            <Text style={styles.text}>
-              End At : {formatDate(event.end_time)}
-            </Text>
-          </View>
-        )}
-        {event.price !== undefined && (
-          <View style={styles.row}>
-            <AppIcon Icon={IndianRupee} color={theme.colors.text} size={18} />
-            <Text style={styles.text}>
-              ₹{event.price} ({event.price_description})
-            </Text>
-          </View>
-        )}
-      </View>
-      <Pressable
-        onPress={() => {
-          console.log(`View More : ${event.title}`); // Debug log
-          //   router.push({ pathname: '/events/[id]', params: { id: event.id } });
-        }}
-        style={({ pressed }) => [
+      return {
+        opacity: withTiming(isVisible ? 0.8 : 0),
+        transform: [
           {
-            backgroundColor: pressed
-              ? theme.colors.gray[200]
-              : theme.colors.text,
-            borderRadius: 8,
-            margin: 12,
-            paddingVertical: 10,
-            alignItems: 'center',
+            scale: withTiming(isVisible ? 1 : 0.6),
           },
-        ]}
-      >
-        <Text
-          style={{
-            color: theme.colors.background,
-            fontFamily: 'Bold',
-            fontSize: 16,
-          }}
-        >
-          View More
-        </Text>
-      </Pressable>
-    </View>
-  );
-};
+        ],
+      };
+    }, []);
+    let IconComponent;
+    let iconColor = '#000';
+    let iconfill = 'transparent';
+
+    if (event.status === 'Past' && event.registration_status === 'Closed') {
+      IconComponent = CircleCheck;
+      iconColor = 'white';
+    } else if (
+      event.status === 'Upcoming' &&
+      event.registration_status === 'Closed'
+    ) {
+      IconComponent = Lock;
+      iconColor = 'rgba(255, 255, 255, 0.3)';
+    } else if (
+      event.status === 'Upcoming' &&
+      event.registration_status === 'Open'
+    ) {
+      IconComponent = ChevronRight;
+      iconColor = 'white';
+    }
+
+    return (
+      <Animated.View style={[styles.eventContainer, rStyle]}>
+        <Animated.View style={styles.dateContainer}>
+          <Animated.Text style={styles.month}>
+            {FormatDate(event.start_time).month}
+          </Animated.Text>
+          <Animated.Text style={styles.day}>
+            {FormatDate(event.start_time).day}
+          </Animated.Text>
+        </Animated.View>
+
+        <Animated.View style={styles.dataContainer}>
+          <Image
+            source={event.banner_image_url}
+            style={styles.image}
+            contentFit="cover"
+          />
+          <Animated.View style={styles.titleContainer}>
+            <Animated.Text numberOfLines={2} style={styles.title}>
+              {event.title}
+            </Animated.Text>
+            <Animated.Text numberOfLines={1} style={styles.location}>
+              {event.location}
+            </Animated.Text>
+            <Animated.Text numberOfLines={1} style={styles.price}>
+              {event.price === 0 ? 'FREE' : `₹ ${event.price}`}
+            </Animated.Text>
+          </Animated.View>
+          <Animated.View style={styles.iconContainer}>
+            <Pressable
+              onPress={() => {
+                if (event.registration_status === 'Open') {
+                  showToast!(
+                    `Registration is open for ${event.title}.`,
+                    'success'
+                  );
+                  // Add your registration logic here
+                } else if (
+                  event.registration_status === 'Closed' &&
+                  event.status === 'Upcoming'
+                ) {
+                  showToast!(
+                    `Registration for ${event.title} has not opened yet.`,
+                    'lock'
+                  );
+                } else {
+                  // Show toast for closed registration
+                  datalog.data('Registration Closed for Event', event.id);
+                  showToast!(
+                    `Registration is closed for ${event.title}.`,
+                    'info'
+                  );
+                }
+              }}
+            >
+              {IconComponent && (
+                <AppIcon
+                  Icon={IconComponent}
+                  color={iconColor}
+                  size={20}
+                  fill={iconfill}
+                />
+              )}
+            </Pressable>
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
-  card: {
-    width: 320,
-    borderRadius: 16,
-    backgroundColor: theme.colors.background,
-    marginVertical: 12,
-    overflow: 'hidden',
-    elevation: 5,
+  eventContainer: {
+    width: wp(90),
+    height: 120,
+    marginVertical: 8,
     borderWidth: 1,
-    borderColor: theme.colors.gray[200],
+    borderColor: '#fff',
+    borderRadius: 12,
+    backgroundColor: 'rgba(255,255,255, 0.5)',
+    opacity: 0.8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.9,
+    shadowRadius: 20,
+    elevation: 20,
+    flexDirection: 'row',
+    display: 'flex',
   },
-  image: {
-    width: 180,
-    height: 180,
+  dateContainer: {
+    width: wp(14),
+    height: '100%',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  content: {
-    padding: 12,
+  month: {
+    fontSize: 12,
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: 18,
+    fontFamily: 'regular',
   },
-  title: {
-    fontSize: 20,
-    fontFamily: 'Bold',
-    color: theme.colors.text,
+  day: {
+    fontSize: 24,
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: 24,
+    fontFamily: 'bold',
   },
-  description: {
-    fontSize: 14,
-    marginTop: 6,
-    color: theme.colors.gray[600],
-    fontFamily: 'Regular',
-  },
-  row: {
+  dataContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 6,
-    gap: 6,
+    justifyContent: 'space-between',
+    paddingLeft: 8,
   },
-  text: {
+  image: {
+    width: wp(18),
+    height: wp(18),
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  titleContainer: {
+    flex: 1,
+    height: '100%',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+  },
+  title: {
     fontSize: 14,
-    fontFamily: 'Regular',
-    color: theme.colors.text,
+    color: '#fff',
+    fontFamily: 'regular',
+  },
+  location: {
+    fontSize: 12,
+    color: '#ccc',
+    fontFamily: 'regular',
+    marginTop: 2,
+  },
+  price: {
+    marginHorizontal: 4,
+    fontSize: 12,
+    color: '#fff',
+    fontFamily: 'regular',
+    marginTop: 2,
+    width: wp(18),
+    alignSelf: 'flex-end',
+    borderRadius: 4,
+    padding: 2,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  iconContainer: {
+    padding: 12,
   },
 });
+
+EventCard.displayName = 'EventCard';
+export { EventCard };

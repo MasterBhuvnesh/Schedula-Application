@@ -8,7 +8,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   const [toast, setToast] = useState<{
     visible: boolean;
     message: string;
-    type: 'success' | 'error' | 'info' | 'warning';
+    type: 'success' | 'error' | 'info' | 'warning' | 'lock';
     duration: number;
   }>({
     visible: false,
@@ -19,7 +19,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const showToast = (
     message: string,
-    type: 'success' | 'error' | 'info' | 'warning' = 'info',
+    type: 'success' | 'error' | 'info' | 'warning' | 'lock' = 'info',
     duration: number = 3000
   ) => {
     setToast({ visible: true, message, type, duration });

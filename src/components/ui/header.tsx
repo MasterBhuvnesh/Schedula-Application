@@ -7,7 +7,7 @@ const Header: React.FC = () => <View style={styles.header} />;
 const styles = StyleSheet.create({
   header: {
     width: wp(100),
-    height: hp(18),
+    height: hp(16),
     backgroundColor: 'transparent',
   },
 });

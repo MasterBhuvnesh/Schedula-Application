@@ -1,4 +1,14 @@
+/*
+NOT SURE ABOUT THE BACKGROUND PROVIDER
+OPTIONS :
+1. Video Background 
+2. Image Background with Blur
+3. Linear Gradient with Blur
+*/
+/*  IMAGE BACKGROUND WITH BLUR  */
+
 import { BlurView } from 'expo-blur';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from '~/hooks';
@@ -90,14 +100,21 @@ export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
       />
       <View style={styles.darkOverlay} />
       {/*  Look Cooled - Short Trick */}
-      {/* <Image
+      <Image
         source={{
           uri: 'https://bqoschvttqomhxalmxoi.supabase.co/storage/v1/object/public/event-banners/a9e407c98e92c6ffc59e086495f19360.jpg',
         }}
         style={StyleSheet.absoluteFillObject}
-        blurRadius={10}
-      /> */}
-      <BlurView intensity={90} tint="dark" style={styles.blurContainer}>
+        blurRadius={80}
+      />
+      <LinearGradient
+        colors={['#000000', 'transparent']}
+        style={StyleSheet.absoluteFill}
+        start={{ x: 0.8, y: 1.5 }}
+        end={{ x: 0.5, y: 0 }}
+      />
+      <BlurView intensity={40} tint="dark" style={styles.blurContainer}>
+        {/* <BlurView intensity={90} tint="dark" style={styles.blurContainer}> */}
         {children}
       </BlurView>
     </View>

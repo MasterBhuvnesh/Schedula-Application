@@ -1,4 +1,10 @@
-import { AlertTriangle, CheckCircle, Info, XCircle } from 'lucide-react-native';
+import {
+  AlertTriangle,
+  CheckCircle,
+  Info,
+  Lock,
+  XCircle,
+} from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { Animated, Platform, StyleSheet, Text } from 'react-native';
 import { AppIcon } from '~/components';
@@ -6,7 +12,7 @@ import { toast } from '~/constants/toast';
 import { ToastProps, ToastType } from '~/types/toast.type';
 import { hp, wp } from '~/utils';
 
-type ColorIntensity = 50 | 100 | 700;
+type ColorIntensity = 0 | 50 | 100 | 700;
 
 // Utility function to get theme color
 const getThemeColor = (type: ToastType, intensity: ColorIntensity) => {
@@ -30,6 +36,10 @@ const iconConfig = {
   info: {
     component: Info,
     color: getThemeColor('info', 700),
+  },
+  lock: {
+    component: Lock,
+    color: getThemeColor('lock', 0),
   },
 };
 
@@ -61,10 +71,9 @@ const Toast: React.FC<ToastProps> = ({
     background: 'rgba(0, 0, 0, 0.5)', // Semi-transparent white for better visibility
     border: 'rgba(15, 14, 14, 0.37)', // Light border for contrast
     text: getThemeColor(type, 100), // Text color based on type
-    iconColor: getThemeColor(type, 700), // Icon color based on type
   };
 
-  const { component: IconComponent } = iconConfig[type];
+  const { component: IconComponent, color: IconColor } = iconConfig[type];
 
   const hideToast = React.useCallback(() => {
     // Exit animation sequence
@@ -188,7 +197,7 @@ const Toast: React.FC<ToastProps> = ({
           Icon={IconComponent}
           strokeWidth={2}
           size={16}
-          color={colors.iconColor}
+          color={IconColor}
         />
       </Animated.View>
 

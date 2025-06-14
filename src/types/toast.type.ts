@@ -1,6 +1,6 @@
 import { TextStyle, ViewStyle } from 'react-native';
 
-export type ToastType = 'success' | 'error' | 'info' | 'warning';
+export type ToastType = 'success' | 'error' | 'info' | 'warning' | 'lock';
 export interface ToastProps {
   visible: boolean;
   message: string;
@@ -12,9 +12,5 @@ export interface ToastProps {
 }
 
 export interface ToastContextType {
-  showToast: (
-    message: string,
-    type?: 'success' | 'error' | 'info' | 'warning',
-    duration?: number
-  ) => void;
+  showToast: (message: string, type?: ToastType, duration?: number) => void;
 }

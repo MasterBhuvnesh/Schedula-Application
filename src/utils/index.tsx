@@ -32,6 +32,7 @@
  * This utility is useful for vertical spacing or sizing elements relative to the device's height.
  */
 import { Dimensions } from 'react-native';
+import { FormatDate } from './date';
 
 export const wp = (percentage: number) => {
   const { width } = Dimensions.get('window');
@@ -42,3 +43,6 @@ export const hp = (percentage: number) => {
   const { height } = Dimensions.get('window');
   return (percentage * height) / 100;
 };
+
+// Other utility functions
+export { FormatDate };

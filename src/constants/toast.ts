@@ -1,5 +1,6 @@
 export const toast = {
   gray: {
+    0: '#ffffff',
     50: '#f9fafb',
     100: '#f3f4f6',
     200: '#e5e7eb',
@@ -12,6 +13,7 @@ export const toast = {
     900: '#111827',
   },
   success: {
+    0: '#ffffff',
     50: '#ecfdf5',
     100: '#d1fae5',
     200: '#a7f3d0',
@@ -24,6 +26,7 @@ export const toast = {
     900: '#064e3b',
   },
   warning: {
+    0: '#ffffff',
     50: '#fffbeb',
     100: '#fef3c7',
     200: '#fde68a',
@@ -36,6 +39,7 @@ export const toast = {
     900: '#78350f',
   },
   error: {
+    0: '#ffffff',
     50: '#fef2f2',
     100: '#fee2e2',
     200: '#fecaca',
@@ -48,6 +52,7 @@ export const toast = {
     900: '#7f1d1d',
   },
   info: {
+    0: '#ffffff',
     50: '#eff6ff',
     100: '#dbeafe',
     200: '#bfdbfe',
@@ -58,5 +63,18 @@ export const toast = {
     700: '#2196F3',
     800: '#1e40af',
     900: '#1e3a8a',
+  },
+  lock: {
+    0: '#ffffff',
+    50: '#fafafa',
+    100: '#f4f4f5',
+    200: '#e4e4e7',
+    300: '#d4d4d8',
+    400: '#a1a1aa',
+    500: '#71717a',
+    600: '#52525b',
+    700: '#3f3f46',
+    800: '#27272a',
+    900: '#18181b',
   },
 };
