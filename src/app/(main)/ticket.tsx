@@ -134,13 +134,6 @@ export default function PermissionsTab() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={styles.header}>
-          <Text style={styles.title}>App Permissions</Text>
-          <Text style={styles.subtitle}>
-            Manage your app permissions to ensure all features work properly
-          </Text>
-        </View>
-
         <PermissionCard
           title="Camera Access"
           description="Required to scan QR codes and take photos"

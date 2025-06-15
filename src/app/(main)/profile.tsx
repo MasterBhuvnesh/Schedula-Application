@@ -5,7 +5,7 @@ import { useUserData } from '~/hooks';
 import { BackgroundProvider } from '~/providers';
 
 export default function ProfileScreen() {
-  const { userData, error, refetch } = useUserData();
+  const { loading, userData, error, refetch } = useUserData();
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(async () => {
@@ -13,6 +13,33 @@ export default function ProfileScreen() {
     await refetch();
     setRefreshing(false);
   }, [refetch]);
+
+  const renderContent = () => {
+    if (loading && !userData) {
+      return <Loader />;
+    }
+
+    if (error && !userData) {
+      return <Error message={error} />;
+    }
+
+    if (!loading && !userData) {
+      return (
+        <Error message="No user data available. Please try again later." />
+      );
+    }
+
+    return (
+      <>
+        {userData && (
+          <>
+            <ProfileCard user={userData} />
+            <SignOutButton />
+          </>
+        )}
+      </>
+    );
+  };
 
   return (
     <BackgroundProvider>
@@ -22,10 +49,7 @@ export default function ProfileScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {!userData && !error && <Loader />}
-        {error && <Error message={error ?? undefined} />}
-        {userData && <ProfileCard user={userData} />}
-        <SignOutButton />
+        {renderContent()}
       </ScrollView>
     </BackgroundProvider>
   );
