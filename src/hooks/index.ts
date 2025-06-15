@@ -1,5 +1,6 @@
 import useCustomFonts from './ui/useFont';
 import { useFrameworkReady } from './ui/useFrameworkReady';
+import { usePermissions } from './ui/usePermission';
 import { useTheme } from './ui/useTheme';
 import { useWarmUpBrowser } from './ui/useWarmUpBrowser';
 // App Data hooks
@@ -9,6 +10,7 @@ export {
   useCustomFonts,
   useEventsData,
   useFrameworkReady,
+  usePermissions,
   useTheme,
   useUserData,
   useWarmUpBrowser,

@@ -1,4 +1,5 @@
 // Global components
+import AlertModal from './global/alert.model';
 import CustomError from './global/error';
 import Glassmorphism from './global/glass';
 import { AppIcon } from './global/icon';
@@ -17,9 +18,13 @@ import AuthView from './ui/auth';
 import { EventCard } from './ui/event.card';
 import Footer from './ui/footer';
 import Header from './ui/header';
+import { PermissionsSection } from './ui/permission';
+import { PermissionCard } from './ui/permission.card';
 import { ProfileCard } from './ui/profile.card';
 import CustomNavBar from './ui/tabnavbar';
+
 export {
+  AlertModal as Alert,
   AppIcon,
   AuthView,
   CustomNavBar,
@@ -31,6 +36,8 @@ export {
   GoogleButton,
   Header,
   CustomLoader as Loader,
+  PermissionCard,
+  PermissionsSection,
   ProfileCard,
   SignOutButton,
   CustomText as Text,

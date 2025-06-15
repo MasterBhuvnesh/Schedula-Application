@@ -51,6 +51,51 @@ export default function HomeScreen() {
           viewableItems.value = vItems;
         }}
         keyExtractor={item => item.id.toString()}
+        // Will be used for the header component if needed
+        // Uncomment the following lines if you want to add a header component
+        // Will be working on it later
+        // ListHeaderComponent={
+        //   <View
+        //     style={{
+        //       width: wp(90),
+        //       height: wp(70),
+        //       marginVertical: 8,
+        //       borderWidth: 1,
+        //       borderColor: '#fff',
+        //       borderRadius: 12,
+        //       backgroundColor: 'rgba(255,255,255, 0.5)',
+        //       opacity: 0.8,
+        //       shadowColor: '#000',
+        //       shadowOffset: { width: 0, height: 0 },
+        //       shadowOpacity: 0.2,
+        //       shadowRadius: 10,
+        //       elevation: 20,
+        //       alignItems: 'center',
+        //       justifyContent: 'center',
+        //       padding: 20,
+        //     }}
+        //   >
+        //     <Text
+        //       style={{
+        //         fontSize: 20,
+        //         marginBottom: 8,
+        //       }}
+        //       bold
+        //     >
+        //       Sponsor - Event
+        //     </Text>
+        //     <Text
+        //       style={{
+        //         fontSize: 14,
+        //         opacity: 0.7,
+        //         textAlign: 'center',
+        //       }}
+        //     >
+        //       This is a sponsored event section. If you would like to sponsor an
+        //       event, please contact us.
+        //     </Text>
+        //   </View>
+        // }
         renderItem={({ item }) => (
           <EventCard
             event={item}
