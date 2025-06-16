@@ -53,7 +53,7 @@ export default function HomeScreen() {
         keyExtractor={item => item.id.toString()}
         // Will be used for the header component if needed
         // Uncomment the following lines if you want to add a header component
-        // Will be working on it later
+        // Will be working on it later to show sponsored events or announcements
         // ListHeaderComponent={
         //   <View
         //     style={{

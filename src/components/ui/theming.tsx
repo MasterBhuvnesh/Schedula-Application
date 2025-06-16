@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Text } from '~/components';
 import { color } from '~/constants/colors';
-import { useTheme } from '~/hooks/useTheme';
+import { useTheme } from '~/hooks';
 import { ThemeType } from '~/types/theme.type';
 
 const THEMING = () => {

@@ -18,7 +18,7 @@ export const useEventsData = () => {
         .select('*')
         .order('status', { ascending: true })
         .order('registration_status', { ascending: true })
-        .order('start_time', { ascending: true })
+        .order('start_time', { ascending: false })
         .range(pageToLoad * PAGE_SIZE, (pageToLoad + 1) * PAGE_SIZE - 1);
 
       if (fetchError) throw fetchError;
