@@ -21,6 +21,7 @@ import Header from './ui/header';
 import { PermissionsSection } from './ui/permission';
 import { PermissionCard } from './ui/permission.card';
 import { ProfileCard } from './ui/profile.card';
+import { SponsorCard } from './ui/sponsor.event.card';
 import CustomNavBar from './ui/tabnavbar';
 
 export {
@@ -40,5 +41,6 @@ export {
   PermissionsSection,
   ProfileCard,
   SignOutButton,
+  SponsorCard,
   CustomText as Text,
 };

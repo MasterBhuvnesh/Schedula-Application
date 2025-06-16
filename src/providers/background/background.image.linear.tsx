@@ -8,6 +8,7 @@ CASES:
 [This is useful for creating a visually appealing background for the app while maintaining readability of the content on top.]
 */
 
+import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
@@ -30,7 +31,9 @@ export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
         start={{ x: 0.8, y: 1.5 }}
         end={{ x: 0.5, y: 0 }}
       />
-      {children}
+      <BlurView intensity={40} tint="dark" style={styles.blurContainer}>
+        {children}
+      </BlurView>
     </View>
   );
 };
@@ -42,5 +45,8 @@ const styles = StyleSheet.create({
   darkOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0,0,0,0.4)',
+  },
+  blurContainer: {
+    flex: 1,
   },
 });

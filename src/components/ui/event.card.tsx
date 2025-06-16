@@ -15,7 +15,7 @@ Points :
 */
 
 import { Image } from 'expo-image';
-import { ChevronRight, CircleCheck, Lock } from 'lucide-react-native';
+import { CircleCheck, Info, Lock } from 'lucide-react-native';
 import React from 'react';
 import { Pressable, StyleSheet, ViewToken } from 'react-native';
 import Animated, {
@@ -70,7 +70,7 @@ const EventCard: React.FC<Props> = React.memo(
       event.status === 'Upcoming' &&
       event.registration_status === 'Open'
     ) {
-      IconComponent = ChevronRight;
+      IconComponent = Info;
       iconColor = 'white';
     }
 
@@ -110,7 +110,7 @@ const EventCard: React.FC<Props> = React.memo(
                   `Registration is open for ${event.title}.`,
                   'success'
                 );
-                // Add your registration logic here
+                // Add registration logic here
               } else if (
                 event.registration_status === 'Closed' &&
                 event.status === 'Upcoming'

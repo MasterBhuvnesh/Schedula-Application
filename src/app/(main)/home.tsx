@@ -7,34 +7,58 @@ import {
   ViewToken,
 } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
-import { Error, EventCard, Loader, Text } from '~/components';
+import { Error, EventCard, Loader, SponsorCard, Text } from '~/components';
 import { useToast } from '~/context';
-import { useEventsData } from '~/hooks';
+import { useEventsData, useSponsoredEvent } from '~/hooks';
 import { datalog } from '~/logger';
 import { ScreenTabsProvider } from '~/providers';
 import { hp, wp } from '~/utils';
 
 export default function HomeScreen() {
-  const { events, loading, error, refetch, loadMore, hasMore } =
-    useEventsData();
+  const {
+    events,
+    loading: eventsLoading,
+    error: eventsError,
+    refetch: refetchEvents,
+    loadMore,
+    hasMore,
+  } = useEventsData();
+
+  const {
+    sponsoredEvent,
+    loading: sponsoredLoading,
+    error: sponsoredError,
+    refetch: refetchSponsored,
+  } = useSponsoredEvent();
+
   const viewableItems = useSharedValue<ViewToken[]>([]);
   const { showToast } = useToast();
+
   useEffect(() => {
-    if (error) {
-      datalog.error('Error fetching events', error); // Log the error
+    if (eventsError || sponsoredError) {
+      datalog.error('Error fetching data', eventsError || sponsoredError);
     }
-  }, [error]);
+  }, [eventsError, sponsoredError]);
+
+  const handleRefresh = async () => {
+    try {
+      await Promise.all([refetchSponsored(), refetchEvents()]);
+    } catch (error) {
+      showToast('Failed to refresh data');
+      datalog.error('Refresh error', String(error));
+    }
+  };
 
   const renderContent = () => {
-    if (loading && events.length === 0) {
+    if (eventsLoading && events.length === 0) {
       return <Loader />;
     }
 
-    if (error && events.length === 0) {
-      return <Error message={error} />;
+    if (eventsError && events.length === 0) {
+      return <Error message={eventsError} />;
     }
 
-    if (!loading && events.length === 0) {
+    if (!eventsLoading && events.length === 0) {
       return (
         <View style={styles.center}>
           <Text>No events available.</Text>
@@ -51,51 +75,15 @@ export default function HomeScreen() {
           viewableItems.value = vItems;
         }}
         keyExtractor={item => item.id.toString()}
-        // Will be used for the header component if needed
-        // Uncomment the following lines if you want to add a header component
-        // Will be working on it later to show sponsored events or announcements
-        // ListHeaderComponent={
-        //   <View
-        //     style={{
-        //       width: wp(90),
-        //       height: wp(70),
-        //       marginVertical: 8,
-        //       borderWidth: 1,
-        //       borderColor: '#fff',
-        //       borderRadius: 12,
-        //       backgroundColor: 'rgba(255,255,255, 0.5)',
-        //       opacity: 0.8,
-        //       shadowColor: '#000',
-        //       shadowOffset: { width: 0, height: 0 },
-        //       shadowOpacity: 0.2,
-        //       shadowRadius: 10,
-        //       elevation: 20,
-        //       alignItems: 'center',
-        //       justifyContent: 'center',
-        //       padding: 20,
-        //     }}
-        //   >
-        //     <Text
-        //       style={{
-        //         fontSize: 20,
-        //         marginBottom: 8,
-        //       }}
-        //       bold
-        //     >
-        //       Sponsor - Event
-        //     </Text>
-        //     <Text
-        //       style={{
-        //         fontSize: 14,
-        //         opacity: 0.7,
-        //         textAlign: 'center',
-        //       }}
-        //     >
-        //       This is a sponsored event section. If you would like to sponsor an
-        //       event, please contact us.
-        //     </Text>
-        //   </View>
-        // }
+        ListHeaderComponent={
+          !sponsoredLoading &&
+          sponsoredEvent &&
+          sponsoredEvent.status === 'Upcoming' ? (
+            <View>
+              <SponsorCard event={sponsoredEvent} />
+            </View>
+          ) : null
+        }
         renderItem={({ item }) => (
           <EventCard
             event={item}
@@ -104,15 +92,17 @@ export default function HomeScreen() {
           />
         )}
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refetch} />
+          <RefreshControl
+            refreshing={eventsLoading || sponsoredLoading}
+            onRefresh={handleRefresh}
+          />
         }
         onEndReached={() => {
-          if (hasMore && !loading) {
+          if (hasMore && !eventsLoading) {
             loadMore();
           }
         }}
-        onEndReachedThreshold={0.5} // Trigger when 50% from the end
-        // ListFooterComponent={loading && events.length > 0 ? <Loader /> : null} // Uncomment if you want a footer loader
+        onEndReachedThreshold={0.5}
       />
     );
   };
@@ -122,7 +112,7 @@ export default function HomeScreen() {
       <View
         style={{
           width: wp(100),
-          height: hp(70) > 540 ? hp(70) : 540, // Ensure minimum height for smaller screens
+          height: hp(70) > 540 ? hp(70) : 540,
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'transparent',
@@ -139,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    padding: 16,
+    padding: 12,
   },
   center: {
     flex: 1,

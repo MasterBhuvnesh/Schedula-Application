@@ -5,12 +5,15 @@ import { useTheme } from './ui/useTheme';
 import { useWarmUpBrowser } from './ui/useWarmUpBrowser';
 // App Data hooks
 import { useEventsData } from './useEvents';
+import { useSponsoredEvent } from './useSponsorEvent';
 import { useUserData } from './useUser';
+
 export {
   useCustomFonts,
   useEventsData,
   useFrameworkReady,
   usePermissions,
+  useSponsoredEvent,
   useTheme,
   useUserData,
   useWarmUpBrowser,
