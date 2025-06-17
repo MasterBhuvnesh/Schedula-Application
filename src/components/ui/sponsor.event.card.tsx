@@ -13,13 +13,13 @@ export const SponsorCard = ({ event }: SponsorCardProps) => {
   return (
     <View style={styles.card}>
       <View style={styles.priceContainer}>
-        {/* <Text style={styles.registrationstatus}>
+        <Text style={{ fontSize: 12, color: '#fff', fontFamily: 'regular' }}>
           {event.registration_status === 'Open'
             ? 'Registration Now'
             : event.registration_status === 'Closed'
               ? 'Upcoming'
               : ''}
-        </Text> */}
+        </Text>
         <Text style={styles.price}>
           {event.price ? `₹ ${event.price}` : 'FREE'}
         </Text>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     width: '100%',
   },
   price: {
@@ -80,16 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     textAlign: 'center',
   },
-  // registrationstatus: {
-  //   marginHorizontal: 4,
-  //   fontSize: 12,
-  //   color: '#fff',
-  //   fontFamily: 'regular',
-  //   marginTop: 2,
-  //   borderRadius: 4,
-  //   padding: 2,
-  //   textAlign: 'center',
-  // },
   title: {
     fontSize: 24,
     marginBottom: 12,

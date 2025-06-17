@@ -1,3 +1,4 @@
+import THEMING from '@/src/components/ui/theming';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { BackgroundProvider } from '~/providers';
@@ -5,7 +6,9 @@ import { BackgroundProvider } from '~/providers';
 export default function TicketScreen() {
   return (
     <BackgroundProvider>
-      <View style={styles.container}></View>
+      <View style={styles.container}>
+        <THEMING />
+      </View>
     </BackgroundProvider>
   );
 }

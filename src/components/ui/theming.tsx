@@ -33,7 +33,7 @@ const THEMING = () => {
         <Text style={{ fontSize: 16 }}>Current theme: {theme}</Text>
       </View>
       <View style={{ flexDirection: 'row', marginTop: 20, flexWrap: 'wrap' }}>
-        {(['Amber', 'Emerald', 'Sky', 'Rose'] as ThemeType[]).map(
+        {(['Amber', 'Emerald', 'Sky', 'Rose', 'Zinc'] as ThemeType[]).map(
           themeOption => (
             <TouchableOpacity
               key={themeOption}
