@@ -41,6 +41,7 @@ export const BackgroundProvider = ({ children }: BackgroundProviderProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   darkOverlay: {
     ...StyleSheet.absoluteFillObject,

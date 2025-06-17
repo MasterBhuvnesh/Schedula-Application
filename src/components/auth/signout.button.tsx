@@ -26,14 +26,16 @@ export const SignOutButton = () => {
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           padding: 10,
           borderRadius: 5,
-          marginTop: 20,
+          marginTop: 10,
           width: '40%',
+
+          borderWidth: 1,
           alignSelf: 'center',
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
-          elevation: 20,
+          elevation: 5,
           justifyContent: 'center',
           alignItems: 'center',
         }}

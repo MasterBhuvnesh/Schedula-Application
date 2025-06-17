@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   eventContainer: {
     width: wp(90),
     height: 120,
+    borderCurve: 'continuous',
     marginVertical: 8,
     borderWidth: 1,
     borderColor: '#fff',

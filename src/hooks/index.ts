@@ -1,3 +1,4 @@
+import { useBackground } from './ui/useBackground';
 import useCustomFonts from './ui/useFont';
 import { useFrameworkReady } from './ui/useFrameworkReady';
 import { usePermissions } from './ui/usePermission';
@@ -9,6 +10,7 @@ import { useSponsoredEvent } from './useSponsorEvent';
 import { useUserData } from './useUser';
 
 export {
+  useBackground,
   useCustomFonts,
   useEventsData,
   useFrameworkReady,

@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 12,
+    borderCurve: 'continuous',
     backgroundColor: 'rgba(255,255,255, 0.5)',
     opacity: 0.8,
     shadowColor: '#000',

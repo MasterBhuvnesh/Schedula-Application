@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   card: {
     width: wp(90),
     backgroundColor: 'rgba(255,255,255, 0.5)',
+    borderCurve: 'continuous',
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 12,

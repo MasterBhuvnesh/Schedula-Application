@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 import {
+  BackgroundCard,
   Error,
   Loader,
   PermissionsSection,
@@ -48,6 +49,7 @@ export default function ProfileScreen() {
           <>
             <ProfileCard user={userData} />
             <PermissionsSection onRefresh={checkPermissions} />
+            <BackgroundCard />
             <SignOutButton />
           </>
         )}
@@ -59,6 +61,8 @@ export default function ProfileScreen() {
     <BackgroundProvider>
       <ScrollView
         contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -71,9 +75,10 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
+    marginTop: 20,
+    paddingBottom: 100,
   },
 });

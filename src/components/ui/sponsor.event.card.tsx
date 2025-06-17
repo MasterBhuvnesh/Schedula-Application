@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     maxHeight: wp(110),
     height: wp(110),
     marginVertical: 8,
+    borderCurve: 'continuous',
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 12,

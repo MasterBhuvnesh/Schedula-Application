@@ -1,5 +1,6 @@
 // Global components
 import AlertModal from './global/alert.model';
+import BackgroundCard from './global/background.theme';
 import CustomError from './global/error';
 import Glassmorphism from './global/glass';
 import { AppIcon } from './global/icon';
@@ -28,6 +29,7 @@ export {
   AlertModal as Alert,
   AppIcon,
   AuthView,
+  BackgroundCard,
   CustomNavBar,
   CustomError as Error,
   EventCard,
