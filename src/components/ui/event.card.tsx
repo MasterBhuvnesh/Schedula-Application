@@ -15,6 +15,7 @@ Points :
 */
 
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import { CircleCheck, Info, Lock } from 'lucide-react-native';
 import React from 'react';
 import { Pressable, StyleSheet, ViewToken } from 'react-native';
@@ -86,11 +87,22 @@ const EventCard: React.FC<Props> = React.memo(
         </Animated.View>
 
         <Animated.View style={styles.dataContainer}>
-          <Image
-            source={event.banner_image_url}
-            style={styles.image}
-            contentFit="cover"
-          />
+          <Pressable
+            onPress={() => {
+              router.push('/event');
+              showToast?.(
+                `More information about ${event.title}.`,
+                'info',
+                3000
+              );
+            }}
+          >
+            <Image
+              source={event.banner_image_url}
+              style={styles.image}
+              contentFit="cover"
+            />
+          </Pressable>
           <Animated.View style={styles.titleContainer}>
             <Animated.Text numberOfLines={2} style={styles.title}>
               {event.title}
@@ -107,10 +119,9 @@ const EventCard: React.FC<Props> = React.memo(
             onPress={() => {
               if (event.registration_status === 'Open') {
                 showToast!(
-                  `Registration is open for ${event.title}.`,
+                  `Registration for ${event.title} is open.`,
                   'success'
                 );
-                // Add registration logic here
               } else if (
                 event.registration_status === 'Closed' &&
                 event.status === 'Upcoming'
@@ -120,8 +131,6 @@ const EventCard: React.FC<Props> = React.memo(
                   'lock'
                 );
               } else {
-                // Show toast for closed registration
-                datalog.data('Registration Closed for Event', event.id);
                 showToast!(
                   `Registration is closed for ${event.title}.`,
                   'info'

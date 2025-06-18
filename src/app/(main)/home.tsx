@@ -7,7 +7,7 @@ import {
   ViewToken,
 } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
-import { Error, EventCard, Loader, SponsorCard, Text } from '~/components';
+import { Error, EventCard, Loader, Text } from '~/components';
 import { useToast } from '~/context';
 import { useEventsData, useSponsoredEvent } from '~/hooks';
 import { datalog } from '~/logger';
@@ -75,15 +75,15 @@ export default function HomeScreen() {
           viewableItems.value = vItems;
         }}
         keyExtractor={item => item.id.toString()}
-        ListHeaderComponent={
-          !sponsoredLoading &&
-          sponsoredEvent &&
-          sponsoredEvent.status === 'Upcoming' ? (
-            <View>
-              <SponsorCard event={sponsoredEvent} />
-            </View>
-          ) : null
-        }
+        // ListHeaderComponent={
+        //   !sponsoredLoading &&
+        //   sponsoredEvent &&
+        //   sponsoredEvent.status === 'Upcoming' ? (
+        //     <View>
+        //       <SponsorCard event={sponsoredEvent} />
+        //     </View>
+        //   ) : null
+        // }
         renderItem={({ item }) => (
           <EventCard
             event={item}
