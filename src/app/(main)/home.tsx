@@ -25,7 +25,7 @@ export default function HomeScreen() {
   } = useEventsData();
 
   const {
-    sponsoredEvent,
+    // sponsoredEvent,
     loading: sponsoredLoading,
     error: sponsoredError,
     refetch: refetchSponsored,

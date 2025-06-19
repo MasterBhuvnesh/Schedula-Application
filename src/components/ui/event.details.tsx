@@ -4,31 +4,12 @@ import React from 'react';
 import { Pressable, StyleSheet, Text as Text_Button, View } from 'react-native';
 import { Text } from '~/components';
 import { Event } from '~/types/data/event.type';
-import { wp } from '~/utils';
-interface SponsorCardProps {
+import { formatDateTime, wp } from '~/utils';
+interface EventDetailsCardProps {
   event: Event;
 }
 
-export const SponsorCard = ({ event }: SponsorCardProps) => {
-  // Format date and time
-  const formatDateTime = (dateString: string) => {
-    const date = new Date(dateString);
-    return {
-      date: date
-        .toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        })
-        .replace(/\//g, '/'),
-      time: date.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      }),
-    };
-  };
-
+export const EventDetailsCard = ({ event }: EventDetailsCardProps) => {
   const startDateTime = formatDateTime(event.start_time);
   const endDateTime = formatDateTime(event.end_time);
 
@@ -240,46 +221,3 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
-// Example usage in a screen component
-export default function TicketScreen() {
-  const event: Event = {
-    id: '1',
-    title: 'Free Web Development Workshop',
-    description:
-      'Learn HTML, CSS, and JavaScript basics in this intensive workshop.',
-    banner_image_url:
-      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
-    start_time: '2023-11-20T09:00:00Z',
-    end_time: '2023-11-20T17:00:00Z',
-    location: 'Tech Hub, Bangalore',
-    price: 0,
-    status: 'Upcoming',
-    registration_status: 'Closed',
-    created_at: '2023-10-01T00:00:00Z',
-    updated_at: '2023-10-01T00:00:00Z',
-  };
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 20,
-          textAlign: 'center',
-          marginBottom: 20,
-          color: '#fff',
-        }}
-      >
-        Event Card
-      </Text>
-      <SponsorCard event={event} />
-    </View>
-  );
-}

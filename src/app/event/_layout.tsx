@@ -15,6 +15,7 @@ const _layout = () => {
         tabBarStyle: {
           display: 'none',
         },
+        animation: 'fade',
       }}
     />
   );

@@ -89,7 +89,12 @@ const EventCard: React.FC<Props> = React.memo(
         <Animated.View style={styles.dataContainer}>
           <Pressable
             onPress={() => {
-              router.push('/event');
+              const encodedEvent = encodeURIComponent(JSON.stringify(event));
+              router.push({
+                pathname: '/event/[event]',
+                params: { event: encodedEvent },
+              });
+              router.setParams({ animation: 'fade' });
               showToast?.(
                 `More information about ${event.title}.`,
                 'info',

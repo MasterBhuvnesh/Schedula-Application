@@ -17,6 +17,7 @@ import GoogleAuth from './sso/google.auth';
 // UI components
 import AuthView from './ui/auth';
 import { EventCard } from './ui/event.card';
+import { EventDetailsCard } from './ui/event.details';
 import Footer from './ui/footer';
 import Header from './ui/header';
 import { PermissionsSection } from './ui/permission';
@@ -33,6 +34,7 @@ export {
   CustomNavBar,
   CustomError as Error,
   EventCard,
+  EventDetailsCard,
   Footer,
   Glassmorphism as GlassView,
   GoogleAuth,

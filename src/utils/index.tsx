@@ -33,6 +33,7 @@
  */
 import { Dimensions } from 'react-native';
 import { FormatDate } from './date';
+import { formatDateTime } from './datetime';
 
 export const wp = (percentage: number) => {
   const { width } = Dimensions.get('window');
@@ -45,4 +46,4 @@ export const hp = (percentage: number) => {
 };
 
 // Other utility functions
-export { FormatDate };
+export { FormatDate, formatDateTime };
