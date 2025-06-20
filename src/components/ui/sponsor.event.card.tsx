@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { Text } from '~/components';
 import { Event } from '~/types/data/event.type';
 import { wp } from '~/utils';
@@ -27,11 +28,22 @@ export const SponsorCard = ({ event }: SponsorCardProps) => {
       <Text style={styles.title} bold>
         {event.title}
       </Text>
-      <Image
-        source={{ uri: event.banner_image_url }}
-        style={styles.image}
-        contentFit="cover"
-      />
+      <Pressable
+        onPress={() => {
+          const encodedEvent = encodeURIComponent(JSON.stringify(event));
+          router.push({
+            pathname: '/event/[event]',
+            params: { event: encodedEvent },
+          });
+          router.setParams({ animation: 'fade' });
+        }}
+      >
+        <Image
+          source={{ uri: event.banner_image_url }}
+          style={styles.image}
+          contentFit="cover"
+        />
+      </Pressable>
       <Text style={styles.description}>{event.description}</Text>
       <View style={styles.detailsContainer}>
         <Text style={styles.detailText}>

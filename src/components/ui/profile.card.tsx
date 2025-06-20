@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
+import { Edit2 } from 'lucide-react-native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from '~/components';
+import { AppIcon, Text } from '~/components';
 import { datalog } from '~/logger';
 import { User } from '~/types/data/user.type';
 import { wp } from '~/utils';
@@ -14,7 +15,9 @@ export function ProfileCard({ user }: ProfileCardProps) {
   datalog.data('ProfileCard rendered', user); // Log the profile data for debugging
   return (
     <View style={styles.profileCard}>
-      <Image source={{ uri: user.image_url }} style={styles.profileImage} />
+      <View>
+        <Image source={{ uri: user.image_url }} style={styles.profileImage} />
+      </View>
       <View style={styles.userInfo}>
         <Text style={styles.fullName}>
           {user.full_name || user.username || 'User Profile'}
@@ -22,11 +25,23 @@ export function ProfileCard({ user }: ProfileCardProps) {
         <Text style={styles.email} opacity={0.7}>
           {user.email}
         </Text>
-        {user.role === 'Admin' && (
-          <View style={styles.roleBadge}>
-            <Text style={styles.roleText}>{user.role}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          {user.role === 'Admin' && (
+            <View style={styles.roleBadge}>
+              <Text style={styles.roleText}>{user.role}</Text>
+            </View>
+          )}
+          <View style={styles.EditBadge}>
+            <AppIcon Icon={Edit2} size={12} color="#fff" />
+            <Text style={styles.EditText}>Edit</Text>
           </View>
-        )}
+        </View>
       </View>
     </View>
   );
@@ -76,10 +91,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 5,
-    alignSelf: 'flex-start',
     marginTop: 4,
   },
   roleText: {
+    color: '#fff',
+    fontSize: 12,
+  },
+  EditBadge: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 4,
+    gap: 4,
+  },
+  EditText: {
     color: '#fff',
     fontSize: 12,
   },

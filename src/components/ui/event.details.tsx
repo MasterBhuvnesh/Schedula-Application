@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   registerButton: {
-    backgroundColor: '#10b981', // Green
+    backgroundColor: '#4ade80', // Light Green
     opacity: 0.9,
   },
   pendingButton: {
