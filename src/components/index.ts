@@ -16,6 +16,9 @@ import GoogleAuth from './sso/google.auth';
 
 // UI components
 import AuthView from './ui/auth';
+import { EditProfileFormSection } from './ui/edit.form';
+import { ProfileEditImage } from './ui/edit.profile';
+import { UpdateButton } from './ui/edit.update.button';
 import { EventCard } from './ui/event.card';
 import { EventDetailsCard } from './ui/event.details';
 import Footer from './ui/footer';
@@ -32,6 +35,7 @@ export {
   AuthView,
   BackgroundCard,
   CustomNavBar,
+  EditProfileFormSection,
   CustomError as Error,
   EventCard,
   EventDetailsCard,
@@ -44,7 +48,9 @@ export {
   PermissionCard,
   PermissionsSection,
   ProfileCard,
+  ProfileEditImage,
   SignOutButton,
   SponsorCard,
   CustomText as Text,
+  UpdateButton,
 };

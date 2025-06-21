@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import { Edit2 } from 'lucide-react-native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { AppIcon, Text } from '~/components';
 import { datalog } from '~/logger';
 import { User } from '~/types/data/user.type';
@@ -22,9 +23,7 @@ export function ProfileCard({ user }: ProfileCardProps) {
         <Text style={styles.fullName}>
           {user.full_name || user.username || 'User Profile'}
         </Text>
-        <Text style={styles.email} opacity={0.7}>
-          {user.email}
-        </Text>
+        <Text style={styles.email}>{user.email}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -37,10 +36,13 @@ export function ProfileCard({ user }: ProfileCardProps) {
               <Text style={styles.roleText}>{user.role}</Text>
             </View>
           )}
-          <View style={styles.EditBadge}>
+          <TouchableOpacity
+            style={styles.EditBadge}
+            onPress={() => router.push('/edit')}
+          >
             <AppIcon Icon={Edit2} size={12} color="#fff" />
             <Text style={styles.EditText}>Edit</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -57,12 +59,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderCurve: 'continuous',
     backgroundColor: 'rgba(255,255,255, 0.5)',
-    opacity: 0.8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    elevation: 20,
+    elevation: 0,
     flexDirection: 'row',
     display: 'flex',
     alignItems: 'center',
@@ -77,14 +78,17 @@ const styles = StyleSheet.create({
   userInfo: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   fullName: {
     fontSize: 18,
     marginBottom: 4,
+    backgroundColor: 'transparent',
   },
   email: {
     fontSize: 12,
     marginBottom: 4,
+    backgroundColor: 'transparent',
   },
   roleBadge: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
