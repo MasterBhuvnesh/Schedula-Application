@@ -3,22 +3,64 @@ import { CalendarCheck, CalendarX, Lock } from 'lucide-react-native';
 import React from 'react';
 import { Pressable, StyleSheet, Text as Text_Button, View } from 'react-native';
 import { Text } from '~/components';
+import { useUserData } from '~/hooks';
+import { registerForEvent } from '~/lib/event.register';
+import { authlog, datalog } from '~/logger';
 import { Event } from '~/types/data/event.type';
+import { ToastContextType } from '~/types/toast.type';
 import { formatDateTime, wp } from '~/utils';
 interface EventDetailsCardProps {
   event: Event;
+  showToast?: ToastContextType['showToast'];
 }
-
-export const EventDetailsCard = ({ event }: EventDetailsCardProps) => {
+export const EventDetailsCard = ({
+  event,
+  showToast,
+}: EventDetailsCardProps) => {
+  const { userData } = useUserData();
+  console.log('Here is the user id from userData:', userData?.id);
   const startDateTime = formatDateTime(event.start_time);
   const endDateTime = formatDateTime(event.end_time);
 
-  // Registration button logic
   const renderRegistrationButton = () => {
-    const handleRegistration = () => {
+    const handleRegistration = async () => {
       if (event.status === 'Upcoming' && event.registration_status === 'Open') {
-        console.log('Registration logic for:', event.title);
-        // Add your registration logic here
+        if (!userData) {
+          authlog.warn('User data not loaded. Please try again.');
+          return;
+        }
+        try {
+          const {
+            registrationId,
+            code,
+            newRegistration,
+          }: {
+            registrationId: string;
+            code: string;
+            newRegistration: boolean;
+          } = await registerForEvent(event.id, userData.id);
+          if (newRegistration) {
+            showToast?.(
+              `You have successfully registered for ${event.title}. Check your ticket in the Tickets section.`,
+              'success'
+            );
+            datalog.data(
+              'Ticket Generation',
+              `Successfully registered for event ${event.title} with registration ID: ${registrationId}, code: ${code}`
+            );
+          } else {
+            showToast?.(
+              `Already registered for ${event.title}. View your ticket in the Tickets section.`,
+              'info'
+            );
+            datalog.data(
+              'Ticket Generation',
+              `You have already registered for event ${event.title} with registration ID: ${registrationId}, code: ${code}`
+            );
+          }
+        } catch (err) {
+          console.error('Registration failed:', err);
+        }
       }
     };
 
