@@ -18,7 +18,7 @@ export const EventDetailsCard = ({
   showToast,
 }: EventDetailsCardProps) => {
   const { userData } = useUserData();
-  console.log('Here is the user id from userData:', userData?.id);
+  authlog.info(`Here is the User ID: ${userData?.id}`); // Log user ID for debugging
   const startDateTime = formatDateTime(event.start_time);
   const endDateTime = formatDateTime(event.end_time);
 
@@ -30,18 +30,12 @@ export const EventDetailsCard = ({
           return;
         }
         try {
-          const {
-            registrationId,
-            code,
-            newRegistration,
-          }: {
-            registrationId: string;
-            code: string;
-            newRegistration: boolean;
-          } = await registerForEvent(event.id, userData.id);
+          const { registrationId, code, newRegistration } =
+            await registerForEvent(event.id, userData.id);
+
           if (newRegistration) {
             showToast?.(
-              `You have successfully registered for ${event.title}. Check your ticket in the Tickets section.`,
+              `Registered for ${event.title}. Check Tickets.`,
               'success'
             );
             datalog.data(
@@ -50,7 +44,7 @@ export const EventDetailsCard = ({
             );
           } else {
             showToast?.(
-              `Already registered for ${event.title}. View your ticket in the Tickets section.`,
+              `You are already registered for ${event.title}. Check your tickets.`,
               'info'
             );
             datalog.data(

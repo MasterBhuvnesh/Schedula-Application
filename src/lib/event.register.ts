@@ -1,14 +1,15 @@
+import { generateQRCode } from '~/lib/generate.ticket.qr';
 import { supabase } from '~/lib/supabase';
+import { qrlog } from '~/logger';
 import { EventRegistrationInsert } from '~/types/register.type';
 
 /**
- * Registers a user for an event
+ * Registers a user for an event and generates a ticket
  * @param eventId - The ID of the event to register for
  * @param userId - The ID of the user registering
- * @returns Promise<{registrationId: string, code: string}>
+ * @returns Promise<{registrationId: string, code: string, newRegistration: boolean}>
  * @throws Error if registration fails
  */
-
 export async function registerForEvent(
   eventId: string,
   userId: string
@@ -40,18 +41,24 @@ export async function registerForEvent(
       throw existingError;
     }
     if (existingRegistration) {
+      // Generate ticket for existing registration
+      await generateTicketForRegistration(
+        existingRegistration.id,
+        existingRegistration.code,
+        userId
+      );
       return {
         registrationId: existingRegistration.id,
-        code: existingRegistration.code, // Use generated code if none returned
-        newRegistration: false, // Indicate this is not a new registration
+        code: existingRegistration.code,
+        newRegistration: false,
       };
     }
 
-    // 4. Create the registration record
+    // 3. Create the registration record
     const registrationData: EventRegistrationInsert = {
       event_id: eventId,
       user_id: userId,
-      status: false, // Default to "ongoing" status
+      status: false,
     };
 
     const { data: registration, error: registrationError } = await supabase
@@ -67,16 +74,55 @@ export async function registerForEvent(
       throw new Error('Failed to create registration');
     }
 
+    // Generate ticket for new registration
+    await generateTicketForRegistration(
+      registration.id,
+      registration.code,
+      userId
+    );
+
     return {
       registrationId: registration.id,
-      code: registration.code, // Use generated code if none returned
-      newRegistration: true, // Indicate this is a new registration
+      code: registration.code,
+      newRegistration: true,
     };
   } catch (error) {
     console.error('Registration failed:', error);
-
     throw new Error(
       error instanceof Error ? error.message : 'Registration failed'
     );
+  }
+}
+
+/**
+ * Helper function to generate ticket for a registration
+ */
+async function generateTicketForRegistration(
+  qrId: string,
+  qrCode: string,
+  userId: string
+) {
+  try {
+    const resultData = await generateQRCode({
+      qrId,
+      qrCode,
+      userId,
+    });
+
+    if (!resultData.exists && resultData.publicUrl) {
+      qrlog.warn('🎟️ Ticket already exists, URL:', resultData.publicUrl);
+      return;
+    }
+
+    if (resultData.exists && resultData.publicUrl) {
+      qrlog.data('✅ Ticket generated, URL:', resultData.publicUrl);
+    } else {
+      qrlog.error('❌ No Ticket URL returned', null);
+    }
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : 'Error generating ticket';
+    qrlog.error('🚨 Error generating Ticket:', message);
+    // Note: We don't throw here because ticket generation failure shouldn't fail the registration
   }
 }

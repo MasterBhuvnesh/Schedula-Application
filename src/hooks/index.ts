@@ -8,6 +8,7 @@ import { useWarmUpBrowser } from './ui/useWarmUpBrowser';
 // App Data hooks
 import { useEventsData } from './useEvents';
 import { useSponsoredEvent } from './useSponsorEvent';
+import { useTicketFiles } from './useTicketsFiles';
 import { useUserData } from './useUser';
 
 export {
@@ -19,6 +20,7 @@ export {
   usePermissions,
   useSponsoredEvent,
   useTheme,
+  useTicketFiles,
   useUserData,
   useWarmUpBrowser,
 };
