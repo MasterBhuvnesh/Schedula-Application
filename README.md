@@ -293,8 +293,6 @@ schedula/
 └── tsconfig.json                  # TypeScript configuration
 ```
 
-```
-
 ## 🔒 Environment Variables
 
 Required environment variables for the application:
@@ -383,4 +381,7 @@ Project Link: [https://github.com/MasterBhuvnesh/Schedula-Application](https://g
 - [Supabase](https://supabase.com/) for the backend infrastructure
 - [Clerk](https://clerk.com/) for authentication services
 - [Lucide](https://lucide.dev/) for the beautiful icon library
+
+```
+
 ```
