@@ -48,7 +48,7 @@ export const SignOutButton = () => {
             backgroundColor: 'transparent',
           }}
         >
-          Sign out
+          SIGN OUT
         </Text>
       </TouchableOpacity>
       <Alert
