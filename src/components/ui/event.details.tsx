@@ -97,44 +97,54 @@ export const EventDetailsCard = ({
   };
 
   return (
-    <View style={styles.card}>
-      <View style={styles.priceContainer}>
-        <Text style={{ fontSize: 12, color: '#fff', fontFamily: 'regular' }}>
-          {event.location}
-        </Text>
-        <Text style={styles.price}>
-          {event.price === 0 ? 'FREE' : `₹ ${event.price}`}
-        </Text>
-      </View>
-
-      <Text style={styles.title} bold>
-        {event.title}
-      </Text>
-
-      <Image
-        source={{ uri: event.banner_image_url }}
-        style={styles.image}
-        contentFit="cover"
-      />
-
-      <Text style={styles.description}>{event.description}</Text>
-
-      <View style={styles.detailsContainer}>
-        <View style={styles.timeContainer}>
-          <Text style={styles.timeLabel}>Starting date:</Text>
-          <Text style={styles.detailText}>{startDateTime.date}</Text>
-          <Text style={styles.timeLabel}>Time:</Text>
-          <Text style={styles.detailText}>{startDateTime.time}</Text>
+    <View>
+      <View style={styles.card}>
+        <View style={styles.priceContainer}>
+          <Text style={{ fontSize: 12, color: '#fff', fontFamily: 'regular' }}>
+            {event.location}
+          </Text>
+          <Text style={styles.price}>
+            {event.price === 0 ? 'FREE' : `₹ ${event.price}`}
+          </Text>
         </View>
 
-        <View style={styles.timeContainer}>
-          <Text style={styles.timeLabel}>Ending date:</Text>
-          <Text style={styles.detailText}>{endDateTime.date}</Text>
-          <Text style={styles.timeLabel}>Time:</Text>
-          <Text style={styles.detailText}>{endDateTime.time}</Text>
+        <Text style={styles.title} bold>
+          {event.title}
+        </Text>
+
+        <Image
+          source={{ uri: event.banner_image_url }}
+          style={styles.image}
+          contentFit="cover"
+        />
+
+        <Text style={styles.description}>{event.description}</Text>
+
+        <View style={styles.detailsContainer}>
+          <View style={styles.timeContainer}>
+            <Text style={styles.timeLabel}>Starting date:</Text>
+            <Text style={styles.detailText}>{startDateTime.date}</Text>
+            <Text style={styles.timeLabel}>Time:</Text>
+            <Text style={styles.detailText}>{startDateTime.time}</Text>
+          </View>
+
+          <View style={styles.timeContainer}>
+            <Text style={styles.timeLabel}>Ending date:</Text>
+            <Text style={styles.detailText}>{endDateTime.date}</Text>
+            <Text style={styles.timeLabel}>Time:</Text>
+            <Text style={styles.detailText}>{endDateTime.time}</Text>
+          </View>
         </View>
+        {renderRegistrationButton()}
       </View>
-      {renderRegistrationButton()}
+      {event.registration_status === 'Open' && event.status === 'Upcoming' && (
+        <View style={{ height: 30 }}>
+          <Text style={{ color: '#fff', fontSize: 10, textAlign: 'center' }}>
+            After registering, please wait a few seconds for your ticket to
+            appear in the Tickets section.
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

@@ -48,6 +48,7 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="event" options={{ headerShown: false }} />
             <Stack.Screen name="edit" options={{ headerShown: false }} />
+            <Stack.Screen name="scan" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
           </Stack>
         </ToastProvider>

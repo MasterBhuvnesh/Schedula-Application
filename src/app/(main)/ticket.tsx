@@ -1,16 +1,18 @@
+import { router } from 'expo-router';
+import { ScanLine } from 'lucide-react-native';
 import React from 'react';
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   Image,
+  Pressable,
   RefreshControl,
   StyleSheet,
   useWindowDimensions,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text } from '~/components';
+import { AppIcon, Text } from '~/components';
 import { useTicketFiles, useUserData } from '~/hooks';
 import { BackgroundProvider } from '~/providers';
 import { TicketFile } from '~/types/data/ticket.type';
@@ -53,9 +55,6 @@ export default function TicketScreen() {
       </View>
 
       <Text style={styles.registrationCode}>Code: {item.registrationCode}</Text>
-      {/*  Download & Share - Button Implementation */}
-      <Button title="Download" />
-      <Button title="Share" />
     </View>
   );
 
@@ -108,6 +107,19 @@ export default function TicketScreen() {
             />
           }
         />
+        {userData?.role === 'Admin' && (
+          <Pressable
+            style={styles.scanButton}
+            onPress={() => {
+              router.push({
+                pathname: '/scan/[id]',
+                params: { id: userData?.id },
+              });
+            }}
+          >
+            <AppIcon Icon={ScanLine} size={24} color="#000" strokeWidth={1.5} />
+          </Pressable>
+        )}
       </SafeAreaView>
     </BackgroundProvider>
   );
@@ -201,5 +213,21 @@ const styles = StyleSheet.create({
     fontFamily: 'bold',
     textAlign: 'center',
     color: '#000',
+  },
+  scanButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 15,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
   },
 });
