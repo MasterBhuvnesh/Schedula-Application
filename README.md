@@ -199,8 +199,8 @@ Schedula features a complete theming system with multiple color schemes:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/masterbhuvnesh/schedula.git
-   cd schedula
+   git clone https://github.com/MasterBhuvnesh/Schedula-Application.git
+   cd Schedula-Application
    ```
 
 2. Install dependencies:
@@ -252,45 +252,47 @@ Schedula features a complete theming system with multiple color schemes:
 
 ```
 schedula/
-├── assets/                 # Static assets (images, fonts, icons)
-├── src/                   # Source code
-│   ├── app/              # Expo Router pages and layouts
-│   │   ├── index.tsx     # Landing/Auth screen
-│   │   ├── edit.tsx      # Profile editing screen
-│   │   ├── (main)/       # Main app tabs
-│   │   │   ├── home.tsx      # Events feed
-│   │   │   ├── ticket.tsx    # User tickets
-│   │   │   └── profile.tsx   # User profile
-│   │   ├── event/        # Event detail pages
-│   │   └── scan/         # QR scanning functionality
-│   ├── components/       # Reusable UI components
-│   │   ├── global/       # Core components (Text, Loader, etc.)
-│   │   ├── auth/         # Authentication components
-│   │   ├── sso/          # Single sign-on components
-│   │   └── ui/           # Feature-specific UI components
-│   ├── hooks/            # Custom React hooks
-│   │   ├── ui/           # UI-related hooks
-│   │   ├── useEvents.ts  # Event data management
-│   │   ├── useUser.ts    # User data management
-│   │   └── useTicketsFiles.ts # Ticket management
-│   ├── lib/              # Core business logic
-│   │   ├── supabase.ts   # Supabase client configuration
-│   │   ├── event.register.ts # Event registration logic
-│   │   ├── checkin.qr.scan.ts # QR check-in functionality
-│   │   └── generate.ticket.qr.ts # Ticket generation
-│   ├── types/            # TypeScript type definitions
-│   │   ├── data/         # Data model types
-│   │   ├── qr.type.ts    # QR code related types
-│   │   └── toast.type.ts # Toast notification types
-│   ├── context/          # React context providers
-│   ├── providers/        # App-wide providers
-│   ├── constants/        # App constants and configurations
-│   ├── logger/           # Logging utilities
-│   └── utils/            # Helper functions and utilities
-├── .env                  # Environment variables (not in repo)
-├── app.json             # Expo configuration
-├── package.json         # Dependencies and scripts
-└── tsconfig.json        # TypeScript configuration
+├── assets/                        # Static assets (images, fonts, icons)
+├── src/                           # Source code
+│   ├── app/                       # Expo Router pages and layouts
+│   │   ├── index.tsx              # Landing/Auth screen
+│   │   ├── edit.tsx               # Profile editing screen
+│   │   ├── (main)/                # Main app tabs
+│   │   │   ├── home.tsx           # Events feed
+│   │   │   ├── ticket.tsx         # User tickets
+│   │   │   └── profile.tsx        # User profile
+│   │   ├── event/                 # Event detail pages
+│   │   └── scan/                  # QR scanning functionality
+│   ├── components/                # Reusable UI components
+│   │   ├── global/                # Core components (Text, Loader, etc.)
+│   │   ├── auth/                  # Authentication components
+│   │   ├── sso/                   # Single sign-on components
+│   │   └── ui/                    # Feature-specific UI components
+│   ├── hooks/                     # Custom React hooks
+│   │   ├── ui/                    # UI-related hooks
+│   │   ├── useEvents.ts           # Event data management
+│   │   ├── useUser.ts             # User data management
+│   │   └── useTicketsFiles.ts     # Ticket management
+│   ├── lib/                       # Core business logic
+│   │   ├── supabase.ts            # Supabase client configuration
+│   │   ├── event.register.ts      # Event registration logic
+│   │   ├── checkin.qr.scan.ts     # QR check-in functionality
+│   │   └── generate.ticket.qr.ts  # Ticket generation
+│   ├── types/                     # TypeScript type definitions
+│   │   ├── data/                  # Data model types
+│   │   ├── qr.type.ts             # QR code related types
+│   │   └── toast.type.ts          # Toast notification types
+│   ├── context/                   # React context providers
+│   ├── providers/                 # App-wide providers
+│   ├── constants/                 # App constants and configurations
+│   ├── logger/                    # Logging utilities
+│   └── utils/                     # Helper functions and utilities
+├── .env                           # Environment variables (not in repo)
+├── app.json                       # Expo configuration
+├── package.json                   # Dependencies and scripts
+└── tsconfig.json                  # TypeScript configuration
+```
+
 ```
 
 ## 🔒 Environment Variables
@@ -381,3 +383,4 @@ Project Link: [https://github.com/MasterBhuvnesh/Schedula-Application](https://g
 - [Supabase](https://supabase.com/) for the backend infrastructure
 - [Clerk](https://clerk.com/) for authentication services
 - [Lucide](https://lucide.dev/) for the beautiful icon library
+```
