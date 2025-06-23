@@ -373,7 +373,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Bhuvnesh Verma - [bhuvneshverma2904@gmail.com](mailto:bhuvneshverma2904@gmail.com)
 
-Project Link: [https://github.com/masterbhuvnesh/schedula](https://github.com/masterbhuvnesh/schedula)
+Project Link: [https://github.com/MasterBhuvnesh/Schedula-Application](https://github.com/MasterBhuvnesh/Schedula-Application)
 
 ## 🙏 Acknowledgments
 
